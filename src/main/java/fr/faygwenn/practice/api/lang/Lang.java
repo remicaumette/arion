@@ -18,7 +18,7 @@ public enum Lang {
     Lang(String name, String code) {
         this.name = name;
         this.code = code;
-        Reader reader = new InputStreamReader(getClass().getResourceAsStream("lang/"+ name().toLowerCase() +".yml"));
+        Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(name().toLowerCase() +".yml"));
         this.config = YamlConfiguration.loadConfiguration(reader);
     }
 

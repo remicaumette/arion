@@ -2,31 +2,3 @@ name: Practice
 main: fr.faygwenn.practice.Practice
 version: 1.0.0-SNAPSHOT
 author: Faygwenn
-commands:
-  duel:
-    description: Invite a player to fight
-  accept:
-    description: Accept a player's invitation
-  lang:
-    description: Change your language
-  arena:
-    description: Arena manipulation commands
-    permission: practice.admin
-  spawnset:
-    description: Define the spawn location
-    permission: practice.admin
-  kit1save:
-    description: Save your edited kit
-  elos:
-    description: Show your elos
-  build:
-    description: Build
-    permission: practice.admin
-  endfightseeinv:
-  settings:
-    description: Player's Settings
-  day:
-  night:
-permissions:
-  practice.admin:
-    description: Admin permission

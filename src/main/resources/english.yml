@@ -19,7 +19,7 @@ invite-self: "&cYou can't invite yourself !"
 select-kit: '&aKit selected : {0}'
 no-editing: "&cYou're not editing a kit !"
 elos-win: '&6You won {0} elos.'
-elos: '&aYou''ve got {0} elos.'
+elos: "&aYou've got {0} elos."
 elos-other: '&a{0} &ahas got {1} elos.'
 enderpearl-delay: '&aYou must wait {0} second{1} to use it again !'
 enderpearl-ready: '&aEnder pearl is ready !'

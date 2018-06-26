@@ -28,5 +28,12 @@
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <systemPath>/Users/remi/Documents/Workspace/faygwenn-pratice/server/spigot.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
     </dependencies>
 </project>

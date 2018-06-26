@@ -1,55 +1,29 @@
 package fr.faygwenn.practice.api.player;
 
 import fr.faygwenn.practice.api.lang.Lang;
-import org.bukkit.Bukkit;
+import fr.faygwenn.practice.api.permission.Rank;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class PracticePlayer {
-    private UUID uniqueId;
-    private String name;
-    private Lang lang;
-    private long lastEnderPearl;
+public interface PracticePlayer {
+    UUID getUniqueId();
 
-    public PracticePlayer(UUID uniqueId, String name, Lang lang) {
-        this.uniqueId = uniqueId;
-        this.name = name;
-        this.lang = lang;
-    }
+    String getName();
 
-    public Player getPlayer() {
-        return Bukkit.getPlayer(uniqueId);
-    }
+    Lang getLang();
 
-    public UUID getUniqueId() {
-        return uniqueId;
-    }
+    void setLang(Lang lang);
 
-    public String getName() {
-        return name;
-    }
+    Rank getRank();
 
-    public Lang getLang() {
-        return lang;
-    }
+    void setRank(Rank rank);
 
-    public void setLang(Lang lang) {
-        this.lang = lang;
-    }
+    long getLastEnderPearl();
 
-    public long getLastEnderPearl() {
-        return lastEnderPearl;
-    }
+    void setLastEnderPearl(long lastEnderPearl);
 
-    public void setLastEnderPearl(long lastEnderPearl) {
-        this.lastEnderPearl = lastEnderPearl;
-    }
+    Player getBukkitPlayer();
 
-    public void heal() {
-        Player player = getPlayer();
-
-        player.setFireTicks(0);
-        player.setHealth(player.getMaxHealth());
-    }
+    void heal();
 }
