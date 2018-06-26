@@ -2,7 +2,6 @@ package fr.faygwenn.practice.object;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.kit.Kit;
-import fr.faygwenn.practice.util.LangMessages;
 import fr.faygwenn.practice.util.MessageSpecial;
 import fr.faygwenn.practice.util.Messages;
 import fr.faygwenn.practice.util.Utils;

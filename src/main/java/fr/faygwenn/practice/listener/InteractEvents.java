@@ -2,7 +2,6 @@ package fr.faygwenn.practice.listener;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.object.SelectKitFor;
-import fr.faygwenn.practice.util.LangMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

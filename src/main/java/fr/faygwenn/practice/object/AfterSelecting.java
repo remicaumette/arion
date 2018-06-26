@@ -5,7 +5,6 @@ import fr.faygwenn.practice.kit.Kit;
 import fr.faygwenn.practice.kit.KitEditor;
 import fr.faygwenn.practice.object.SelectKitFor.Type;
 import fr.faygwenn.practice.search.OpponentSearch;
-import fr.faygwenn.practice.util.LangMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

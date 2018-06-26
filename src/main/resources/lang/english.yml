@@ -1,0 +1,33 @@
+lang-change: '&aNew language : english.'
+unknown-arguments: '&cUnknown arguments. Usage : {0}'
+unknown-player: '&cPlayer {0} could not fr found.'
+in-fight: '&cPlayer {0} &cis already in fight.'
+in-fight-self: "&cYou're already in fight."
+request: '&a{0} &ahas invited you to fight with him ! Use /accept to accept the invitation.'
+request-self: '&aYou invited {0} &ato fight with you.'
+no-request: "&cYou don't have any fight request ! Invite someone with /duel <player>"
+invitation-accepted: '&a{0} &aaccepted your invitation.'
+invitation-accepted-self: '&aYou accepted the invitation of {0}&a.'
+searching-arena: '&eSearching an arena...'
+arena-found: '&6A free arena has been found.'
+searching-player: '&eSearching for a player in &6{0} &emode...'
+player-found: '&6A player has been found : {0}'
+start: '&c&lThe fight has started ! Good luck !'
+start-countdown: '&cThe game will start in {0} second{1}...'
+fight-end: '&a&l{0} &a&lwon the fight !'
+invite-self: "&cYou can't invite yourself !"
+select-kit: '&aKit selected : {0}'
+no-editing: "&cYou're not editing a kit !"
+elos-win: '&6You won {0} elos.'
+elos: '&aYou''ve got {0} elos.'
+elos-other: '&a{0} &ahas got {1} elos.'
+enderpearl-delay: '&aYou must wait {0} second{1} to use it again !'
+enderpearl-ready: '&aEnder pearl is ready !'
+not-enougth-ranked-players: "&aThere aren't enougth players to enable ranked mode !"
+cancel-search: '&cYou left the queue !'
+cant-enter-builduhc: "&cYou can't enter the BuildUhc queue for now !"
+kits-inventory:
+  name: '&aKit selector'
+items:
+  rules:
+    name: '&aRules'

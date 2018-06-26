@@ -1,7 +1,8 @@
 package fr.faygwenn.practice.command;
 
+import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.kit.Kit;
-import fr.faygwenn.practice.util.LangMessages;
+import fr.faygwenn.practice.api.player.PracticePlayer;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -10,6 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ElosCommand implements CommandExecutor {
+    private Practice plugin;
+
+    public ElosCommand(Practice plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -26,12 +33,12 @@ public class ElosCommand implements CommandExecutor {
                 showElos(player);
                 return true;
             }
-
             Player target = Bukkit.getPlayer(args[0]);
+            PracticePlayer practicePlayer = plugin.getPlayerManager().getPlayer(player);
 
             if (target == null) {
-                LangMessages.UNKNOWN_PLAYER.getFor(player).replace("{player}", args[0]).send(player);
-                return false;
+                player.sendMessage(practicePlayer.getLang().tl("unknown-player", args[0]));
+                return true;
             }
 
             player.sendMessage("§aElos de " + target.getDisplayName());

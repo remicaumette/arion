@@ -1,10 +1,8 @@
 package fr.faygwenn.practice;
 
 import fr.faygwenn.practice.command.*;
-import fr.faygwenn.practice.listener.InventoryListener;
-import fr.faygwenn.practice.listener.ClickEvents;
-import fr.faygwenn.practice.listener.Events;
-import fr.faygwenn.practice.listener.InteractEvents;
+import fr.faygwenn.practice.listener.*;
+import fr.faygwenn.practice.api.player.PlayerManager;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,7 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -24,6 +21,7 @@ import java.util.List;
 
 public class Practice extends JavaPlugin implements Listener {
     public static Practice i;
+    private PlayerManager playerManager;
     public Manager manager;
     public List<Player> build;
     public List<Player> specInv;
@@ -33,6 +31,7 @@ public class Practice extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         i = this;
+        playerManager = new PlayerManager(this);
         manager = new Manager();
         build = new ArrayList<>();
         specInv = new ArrayList<>();
@@ -58,9 +57,14 @@ public class Practice extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new ClickEvents(), this);
         getServer().getPluginManager().registerEvents(new InteractEvents(), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
 
         initializeItems();
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 
     @Override
@@ -162,23 +166,5 @@ public class Practice extends JavaPlugin implements Listener {
         player.getInventory().setItem(7, settingsItem);
         player.getInventory().setItem(8, editkitItem);
         player.updateInventory();
-    }
-
-	/*@SuppressWarnings("deprecation")
-	public void hide(Player player)
-	{
-		for (Player pl : Bukkit.getOnlinePlayers())
-		{
-			player.hidePlayer(pl);
-			pl.hidePlayer(player);
-
-			/*((CraftPlayer) pl).getHandle().playerConnection.sendPacket(PacketPlayOutPlayerInfo.addPlayer(((CraftPlayer) player).getHandle()));
-			((CraftPlayer) player).getHandle().playerConnection.sendPacket(PacketPlayOutPlayerInfo.addPlayer(((CraftPlayer) pl).getHandle()));*/
-	/*}
-	}*/
-
-    public void heal(Player player) {
-        player.setFireTicks(0);
-        player.setHealth(((Damageable) player).getMaxHealth());
     }
 }

@@ -2,7 +2,6 @@ package fr.faygwenn.practice.kit;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.object.LookingFor.Type;
-import fr.faygwenn.practice.util.LangMessages;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

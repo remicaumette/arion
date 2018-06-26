@@ -1,7 +1,7 @@
 package fr.faygwenn.practice.command;
 
 import fr.faygwenn.practice.Practice;
-import fr.faygwenn.practice.util.LangMessages;
+import fr.faygwenn.practice.api.player.PracticePlayer;
 import fr.faygwenn.practice.util.Messages;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.ChatColor;
@@ -13,22 +13,28 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 public class ArenaCommand implements CommandExecutor {
+    private Practice plugin;
+
+    public ArenaCommand(Practice plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("You must be a player to execute this command !");
-            return false;
+            return true;
         }
-
         Player player = (Player) sender;
+        PracticePlayer practicePlayer = plugin.getPlayerManager().getPlayer(player);
 
         // Commande /arena setp1 [name]
 
         if (args.length == 2 && args[0].equalsIgnoreCase("setp1")) {
             String name = ChatColor.translateAlternateColorCodes('&', args[1]);
 
-            Practice.i.database.set("arenas." + Utils.getArenaPath(name) + ".name", name);
-            Practice.i.database.set("arenas." + Utils.getArenaPath(name) + ".location-1", Utils.serializeLocation(player.getLocation()));
+            plugin.database.set("arenas." + Utils.getArenaPath(name) + ".name", name);
+            plugin.database.set("arenas." + Utils.getArenaPath(name) + ".location-1", Utils.serializeLocation(player.getLocation()));
             Messages.DEFINE_ARENA.get().replace("{arena}", name).replace("{point}", 1).send(player);
 
             return true;
@@ -39,8 +45,8 @@ public class ArenaCommand implements CommandExecutor {
         else if (args.length == 2 && args[0].equalsIgnoreCase("setp2")) {
             String name = ChatColor.translateAlternateColorCodes('&', args[1]);
 
-            Practice.i.database.set("arenas." + Utils.getArenaPath(name) + ".name", name);
-            Practice.i.database.set("arenas." + Utils.getArenaPath(name) + ".location-2", Utils.serializeLocation(player.getLocation()));
+            plugin.database.set("arenas." + Utils.getArenaPath(name) + ".name", name);
+            plugin.database.set("arenas." + Utils.getArenaPath(name) + ".location-2", Utils.serializeLocation(player.getLocation()));
             Messages.DEFINE_ARENA.get().replace("{arena}", name).replace("{point}", 2).send(player);
 
             return true;
@@ -52,7 +58,7 @@ public class ArenaCommand implements CommandExecutor {
             String path = args[1];
             String name = Utils.getArenaName(path);
 
-            Practice.i.database.set("arenas." + path, null);
+            plugin.database.set("arenas." + path, null);
             Messages.REMOVE_ARENA.get().replace("{arena}", name).send(player);
 
             return true;
@@ -81,12 +87,9 @@ public class ArenaCommand implements CommandExecutor {
 
             return true;
         }
-
-        // Autre
-
         else {
-            LangMessages.UNKNOWN_ARGUMENTS.getFor(player).replace("{usage}", "/arena setp1 [arena]|setp2 [arena]|remove|list").send(player);
-            return false;
+            player.sendMessage(practicePlayer.getLang().tl("unknown-arguments", "/arena setp1 [arena]|setp2 [arena]|remove|list"));
+            return true;
         }
     }
 }

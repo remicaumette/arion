@@ -2,11 +2,8 @@ package fr.faygwenn.practice.listener;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.object.Fight;
-import fr.faygwenn.practice.util.DelayRunnable;
-import fr.faygwenn.practice.util.LangMessages;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,71 +12,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-
 public class Events implements Listener {
-    private HashMap<Player, DelayRunnable> enderDelays = new HashMap<Player, DelayRunnable>();
-
-    @EventHandler
-    public void execute(PlayerInteractEvent event) {
-        if (!event.getAction().toString().contains("RIGHT_CLICK"))
-            return;
-
-        ItemStack item = event.getItem();
-
-        if (item == null)
-            return;
-
-        if (!item.getType().equals(Material.ENDER_PEARL))
-            return;
-
-        Player player = event.getPlayer();
-
-        if (Practice.i.manager.hasFight(player)) {
-            if (Practice.i.manager.getFight(player).invincibility) {
-                event.setCancelled(true);
-                player.updateInventory();
-                return;
-            }
-        }
-
-        if (enderDelays.containsKey(player)) {
-            DelayRunnable runnable = enderDelays.get(player);
-
-            if (runnable.delay > 0) {
-                LangMessages.ENDERPEARL_DELAY.getFor(player).replace("{time}", runnable.delay).replace("{plural}", runnable.delay > 1 ? "s" : "").send(player);
-                event.setCancelled(true);
-                player.updateInventory();
-                return;
-            } else
-                newEnderDelay(player);
-        } else
-            newEnderDelay(player);
-    }
-
-    private void newEnderDelay(Player player) {
-        DelayRunnable runnable = new DelayRunnable(player) {
-            @Override
-            public void run() {
-                delay--;
-
-                if (delay <= 0) {
-                    enderDelays.remove(player);
-                    LangMessages.ENDERPEARL_READY.getFor(player).send(player);
-                    cancel();
-                }
-            }
-        };
-
-        runnable.runTaskTimerAsynchronously(Practice.i, 20L, 20L);
-        enderDelays.put(player, runnable);
-    }
-
     @EventHandler
     public void execute(CreatureSpawnEvent event) {
         event.setCancelled(true);
