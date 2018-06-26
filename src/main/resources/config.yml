@@ -1,0 +1,127 @@
+# Configuration file for Practice
+
+# Minimum de joueurs pour le ranked
+
+min-players-ranked: 75
+
+# Messages
+
+msg:
+  lang-change:
+    en: '&aNew language : english.'
+    fr: '&aNouvelle langue : français.'
+  unknown-arguments:
+    en: '&cUnknown arguments. Usage : {usage}'
+    fr: '&cArguments incorrects. Usage : {usage}'
+  unknown-player:
+    en: '&cPlayer {player} could not fr found.'
+    fr: '&cLe joueur {player} n''a pas pu être trouvé.'
+  in-fight:
+    en: '&cPlayer {player} &cis already in fight.'
+    fr: '&cLe joueur {player} &c est déjà en combat.'
+  in-fight-self:
+    en: '&cYou''re already in fight.'
+    fr: '&cTu es déjà en combat.'
+  request:
+    en: '&a{player} &ahas invited you to fight with him ! Use /accept to accept the invitation.'
+    fr: '&a{player} &at''a invité à combattre avec lui ! Utilise /accept pour accepter l''invitation.'
+  request-self:
+    en: '&aYou invited {player} &ato fight with you.'
+    fr: '&aTu as invité {player} &aà te battre avec toi.'
+  no-request:
+    en: '&cYou don''t have any fight request ! Invite someone with /duel <player>'
+    fr: '&cTu n''as pas d''invitation à combattre ! Invite quelqu''un avec /duel <player>'
+  invitation-accepted:
+    en: '&a{player} &aaccepted your invitation.'
+    fr: '&a{player} &aa accepté ton invitation.'
+  invitation-accepted-self:
+    en: '&aYou accepted the invitation of {player}&a.'
+    fr: '&aTu as accepté l''invitation de {player}&a.'
+  searching-arena:
+    en: '&eSearching an arena...'
+    fr: '&eRecherche d''une arène...'
+  arena-found:
+    en: '&6A free arena has been found.'
+    fr: '&6Une arène libre a été trouvée.'
+  searching-player:
+    en: '&eSearching for a player in &6{mode} &emode...'
+    fr: '&eRecherche d''un adversaire en &6{mode}&e...'
+  player-found:
+    en: '&6A player has been found : {player}'
+    fr: '&6Un adversaire a été trouvé : {player}'
+  start:
+    en: '&c&lThe fight has started ! Good luck !'
+    fr: '&c&lLe combat a commencé ! Bonne chance !'
+  start-countdown:
+    en: '&cThe game will start in {time} second{plural}...'
+    fr: '&cLe combat va commencer dans {time} seconde{plural}...'
+  fight-end:
+    en: '&a&l{winner} &a&lwon the fight !'
+    fr: '&a&l{winner} &a&la gagné le combat !'
+  invite-self:
+    en: '&cYou can''t invite yourself !'
+    fr: '&cTu ne peux pas t''inviter toi-même !'
+  select-kit:
+    en: '&aKit selected : {kit}'
+    fr: '&aKit sélectionné : {kit}'
+  no-editing:
+    en: '&cYou''re not editing a kit !'
+    fr: '&cTu n''est pas en train d''éditer un kit !'
+  elos-win:
+    en: '&6You won {elos} elos.'
+    fr: '&6Tu as gagné {elos} elos.'
+  elos:
+    en: '&aYou''ve got {elos} elos.'
+    fr: '&aTu as {elos} elos.'
+  elos-other:
+    en: '&a{player} &ahas got {elos} elos.'
+    fr: '&a{player} &aa {elos} elos.'
+  enderpearl-delay:
+    en: '&aYou must wait {time} second{plural} to use it again !'
+    fr: '&aTu dois attendre {time} seconde{plural} pour utiliser ça !'
+  enderpearl-ready:
+    en: '&aEnder pearl is ready !'
+    fr: '&aL''ender pearl est prête !'
+  not-enougth-ranked-players:
+    en: '&aThere aren''t enougth players to enable ranked mode !'
+    fr: '&aIl n''y a pas assez de joueurs pour jouer en ranked !'
+  cancel-search:
+    en: '&cYou left the queue !'
+    fr: '&cTu as quitté la file d''attente !'
+  cant-enter-builduhc:
+    en: '&cYou can''t enter the BuildUhc queue for now !'
+    fr: '&cVous ne pouvez pas rejoindre la queue BuildUhc pour le moment !'
+
+# Inventory texts
+
+  kits-inventory:
+    name:
+      en: '&aKit selector'
+      fr: '&aSélecteur de kit'
+  items:
+    rules:
+      name:
+        en: '&aRules'
+        fr: '&aRègles'
+
+# Scoreboards
+
+scoreboard-name: ''
+
+scoreboard-spawn:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+
+scoreboard-file:
+  - ''
+  - ''
+  - ''
+
+scoreboard-fight:
+  - ''
+  - ''
+  - ''
