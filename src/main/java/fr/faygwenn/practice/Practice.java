@@ -1,11 +1,11 @@
 package fr.faygwenn.practice;
 
-import fr.faygwenn.practice.commands.*;
-import fr.faygwenn.practice.events.ClickEvents;
-import fr.faygwenn.practice.events.Events;
-import fr.faygwenn.practice.events.InteractEvents;
-import fr.faygwenn.practice.utils.ConfigFile;
-import fr.faygwenn.practice.utils.Utils;
+import fr.faygwenn.practice.command.*;
+import fr.faygwenn.practice.event.ClickEvents;
+import fr.faygwenn.practice.event.Events;
+import fr.faygwenn.practice.event.InteractEvents;
+import fr.faygwenn.practice.util.ConfigFile;
+import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -32,8 +32,6 @@ public class Practice extends JavaPlugin implements Listener {
     public final ConfigFile config = new ConfigFile(this, "config.yml");
     public final ConfigFile database = new ConfigFile(this, "database.yml");
 
-    // On enable
-
     @Override
     public void onEnable() {
         i = this;
@@ -53,7 +51,6 @@ public class Practice extends JavaPlugin implements Listener {
         getCommand("settings").setExecutor(new SettingsCommand());
         getCommand("day").setExecutor(new TimeCommand());
         getCommand("night").setExecutor(new TimeCommand());
-
 
         Bukkit.getPluginManager().registerEvents(new Events(), this);
         Bukkit.getPluginManager().registerEvents(new ClickEvents(), this);

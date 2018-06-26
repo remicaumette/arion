@@ -1,10 +1,10 @@
 package fr.faygwenn.practice;
 
-import fr.faygwenn.practice.kits.Kit;
-import fr.faygwenn.practice.objects.Fight;
-import fr.faygwenn.practice.objects.LookingFor;
-import fr.faygwenn.practice.objects.SelectKitFor;
-import fr.faygwenn.practice.utils.LangMessages;
+import fr.faygwenn.practice.kit.Kit;
+import fr.faygwenn.practice.object.Fight;
+import fr.faygwenn.practice.object.LookingFor;
+import fr.faygwenn.practice.object.SelectKitFor;
+import fr.faygwenn.practice.util.LangMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;

@@ -1,5 +1,5 @@
 name: Practice
-main: fr.faygwennnn.practice.Practice
+main: fr.faygwenn.practice.Practice
 version: 1.0.0-SNAPSHOT
 author: Faygwenn
 commands:
@@ -25,6 +25,8 @@ commands:
   endfightseeinv:
   settings:
     description: Player's Settings
+  day:
+  night:
 permissions:
   practice.admin:
     description: Admin permission
