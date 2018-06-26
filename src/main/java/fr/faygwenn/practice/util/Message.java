@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -124,7 +124,7 @@ public class Message extends Replaceable<Message> {
     }
 
     @SuppressWarnings("unchecked")
-    public static Message fromConfig(YamlConfiguration config, String path) {
+    public static Message fromConfig(Configuration config, String path) {
         Object object = config.get(path);
 
         if (object instanceof List<?>)

@@ -61,7 +61,7 @@ public class ArenaCommand implements CommandExecutor {
         // Commande /arena list
 
         else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
-            ConfigurationSection sec = Practice.i.database.get().getConfigurationSection("arenas");
+            ConfigurationSection sec = Practice.i.database.getConfigurationSection("arenas");
 
             if (sec == null) {
                 Messages.NO_ARENAS.get().send(player);

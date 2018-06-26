@@ -70,7 +70,7 @@ public class Manager {
     // Arenas
 
     public String getArena() {
-        ConfigurationSection sec = Practice.i.database.get().getConfigurationSection("arenas");
+        ConfigurationSection sec = Practice.i.database.getConfigurationSection("arenas");
 
         return sec.getKeys(false).toArray(new String[sec.getKeys(false).size()])[new Random().nextInt(sec.getKeys(false).size())];
     }

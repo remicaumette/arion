@@ -38,13 +38,13 @@ public enum LangMessages {
     private Message messageEN;
     private Message messageFR;
 
-    private LangMessages(String path) {
-        this.messageEN = Message.fromConfig(Practice.i.config.get(), "msg." + path + ".en");
-        this.messageFR = Message.fromConfig(Practice.i.config.get(), "msg." + path + ".fr");
+    LangMessages(String path) {
+        this.messageEN = Message.fromConfig(Practice.i.config, "msg." + path + ".en");
+        this.messageFR = Message.fromConfig(Practice.i.config, "msg." + path + ".fr");
     }
 
     public Message getFor(Player player) {
-        if (Practice.i.database.get().getString("lang." + player.getUniqueId().toString()).equals("fr"))
+        if (Practice.i.database.getString("lang." + player.getUniqueId().toString()).equals("fr"))
             return messageFR;
         else
             return messageEN;

@@ -1,4 +1,4 @@
-package fr.faygwenn.practice.event;
+package fr.faygwenn.practice.listener;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.object.Fight;
@@ -158,15 +158,15 @@ public class Events implements Listener {
     @SuppressWarnings("deprecation")
     @EventHandler
     public void execute(PlayerJoinEvent event) {
-        if (!Practice.i.database.get().contains("lang." + event.getPlayer().getUniqueId().toString()))
+        if (!Practice.i.database.contains("lang." + event.getPlayer().getUniqueId().toString()))
             Practice.i.database.set("lang." + event.getPlayer().getUniqueId().toString(), "en");
 
-        if (!Practice.i.database.get().contains("elos." + event.getPlayer().getUniqueId().toString()))
+        if (!Practice.i.database.contains("elos." + event.getPlayer().getUniqueId().toString()))
             Practice.i.database.set("elos." + event.getPlayer().getUniqueId().toString(), 0);
 
         Practice.i.spawnInventory(event.getPlayer());
 
-        Location loc = Utils.unserializeLocation(Practice.i.database.get().getString("spawn"));
+        Location loc = Utils.unserializeLocation(Practice.i.database.getString("spawn"));
 
         if (loc != null)
             event.getPlayer().teleport(loc);

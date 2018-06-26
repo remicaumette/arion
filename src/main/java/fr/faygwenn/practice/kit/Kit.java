@@ -30,14 +30,14 @@ public enum Kit {
         if (edited) {
             String uuid = player.getUniqueId().toString();
 
-            if (Practice.i.database.get().contains("edited-kits." + uuid + "." + name.toLowerCase())) {
+            if (Practice.i.database.contains("edited-kits." + uuid + "." + name.toLowerCase())) {
                 for (int i = 0; i < 36; i++)
-                    player.getInventory().setItem(i, Utils.unserializeItem(Practice.i.database.get().getString("edited-kits." + uuid + "." + name.toLowerCase() + ".content").split(";")[i]));
+                    player.getInventory().setItem(i, Utils.unserializeItem(Practice.i.database.getString("edited-kits." + uuid + "." + name.toLowerCase() + ".content").split(";")[i]));
 
-                player.getInventory().setHelmet(Utils.unserializeItem(Practice.i.database.get().getString("edited-kits." + uuid + "." + name.toLowerCase() + ".helmet")));
-                player.getInventory().setChestplate(Utils.unserializeItem(Practice.i.database.get().getString("edited-kits." + uuid + "." + name.toLowerCase() + ".chestplate")));
-                player.getInventory().setLeggings(Utils.unserializeItem(Practice.i.database.get().getString("edited-kits." + uuid + "." + name.toLowerCase() + ".leggings")));
-                player.getInventory().setBoots(Utils.unserializeItem(Practice.i.database.get().getString("edited-kits." + uuid + "." + name.toLowerCase() + ".boots")));
+                player.getInventory().setHelmet(Utils.unserializeItem(Practice.i.database.getString("edited-kits." + uuid + "." + name.toLowerCase() + ".helmet")));
+                player.getInventory().setChestplate(Utils.unserializeItem(Practice.i.database.getString("edited-kits." + uuid + "." + name.toLowerCase() + ".chestplate")));
+                player.getInventory().setLeggings(Utils.unserializeItem(Practice.i.database.getString("edited-kits." + uuid + "." + name.toLowerCase() + ".leggings")));
+                player.getInventory().setBoots(Utils.unserializeItem(Practice.i.database.getString("edited-kits." + uuid + "." + name.toLowerCase() + ".boots")));
                 player.updateInventory();
             } else
                 give(player, false);

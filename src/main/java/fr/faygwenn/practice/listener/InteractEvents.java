@@ -1,4 +1,4 @@
-package fr.faygwenn.practice.event;
+package fr.faygwenn.practice.listener;
 
 import fr.faygwenn.practice.Practice;
 import fr.faygwenn.practice.object.SelectKitFor;
@@ -27,7 +27,7 @@ public class InteractEvents implements Listener {
 
                 Player player = event.getPlayer();
 
-                if (Bukkit.getOfflinePlayers().length < Practice.i.config.get().getInt("min-players-ranked")) {
+                if (Bukkit.getOfflinePlayers().length < Practice.i.config.getInt("min-players-ranked")) {
                     LangMessages.NOT_ENOUGTH_RANKED_PLAYERS.getFor(player).send(player);
                     return;
                 }

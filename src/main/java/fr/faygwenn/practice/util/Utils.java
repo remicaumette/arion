@@ -114,17 +114,17 @@ public class Utils {
     }
 
     public static final int getElos(Player player, Kit kit) {
-        return Practice.i.database.get().getInt("elos." + player.getUniqueId().toString() + "." + kit.toString());
+        return Practice.i.database.getInt("elos." + player.getUniqueId().toString() + "." + kit.toString());
     }
 
     public static final void addElos(Player player, int elos, Kit kit) {
         String uuid = player.getUniqueId().toString();
-        Practice.i.database.set("elos." + uuid + "." + kit.toString(), Practice.i.database.get().getInt("elos." + uuid + "." + kit.toString()) + elos);
+        Practice.i.database.set("elos." + uuid + "." + kit.toString(), Practice.i.database.getInt("elos." + uuid + "." + kit.toString()) + elos);
     }
 
     public static final Location getSpawnLocation() {
-        if (Practice.i.database.get().contains("spawn"))
-            return unserializeLocation(Practice.i.database.get().getString("spawn")).add(0.5D, 0.0, 0.5D);
+        if (Practice.i.database.contains("spawn"))
+            return unserializeLocation(Practice.i.database.getString("spawn")).add(0.5D, 0.0, 0.5D);
         else
             return Bukkit.getWorlds().get(0).getSpawnLocation();
     }
@@ -134,11 +134,11 @@ public class Utils {
     }
 
     public static final String getArenaName(String path) {
-        return ChatColor.translateAlternateColorCodes('&', Practice.i.database.get().getString("arenas." + path + ".name"));
+        return ChatColor.translateAlternateColorCodes('&', Practice.i.database.getString("arenas." + path + ".name"));
     }
 
     public static final Location getArenaLocation(String path, int point) {
-        return unserializeLocation(Practice.i.database.get().getString("arenas." + path + ".location-" + point));
+        return unserializeLocation(Practice.i.database.getString("arenas." + path + ".location-" + point));
     }
 
     public static final String serializeLocation(Location location) {

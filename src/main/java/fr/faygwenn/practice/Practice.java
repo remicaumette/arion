@@ -1,43 +1,46 @@
 package fr.faygwenn.practice;
 
 import fr.faygwenn.practice.command.*;
-import fr.faygwenn.practice.event.ClickEvents;
-import fr.faygwenn.practice.event.Events;
-import fr.faygwenn.practice.event.InteractEvents;
-import fr.faygwenn.practice.util.ConfigFile;
+import fr.faygwenn.practice.listener.InventoryListener;
+import fr.faygwenn.practice.listener.ClickEvents;
+import fr.faygwenn.practice.listener.Events;
+import fr.faygwenn.practice.listener.InteractEvents;
 import fr.faygwenn.practice.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Practice extends JavaPlugin implements Listener {
-
     public static Practice i;
     public Manager manager;
-    public ArrayList<Player> build;
-    public ArrayList<Player> specInv;
-
-    public final ConfigFile config = new ConfigFile(this, "config.yml");
-    public final ConfigFile database = new ConfigFile(this, "database.yml");
+    public List<Player> build;
+    public List<Player> specInv;
+    public Configuration config;
+    public Configuration database;
 
     @Override
     public void onEnable() {
         i = this;
         manager = new Manager();
-        build = new ArrayList<Player>();
-        specInv = new ArrayList<Player>();
+        build = new ArrayList<>();
+        specInv = new ArrayList<>();
+
+        saveResource("database.yml", false);
+        saveResource("config.yml", false);
+        config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml"));
+        database = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "database.yml"));
 
         getCommand("duel").setExecutor(new DuelCommand());
         getCommand("accept").setExecutor(new AcceptCommand());
@@ -52,10 +55,10 @@ public class Practice extends JavaPlugin implements Listener {
         getCommand("day").setExecutor(new TimeCommand());
         getCommand("night").setExecutor(new TimeCommand());
 
-        Bukkit.getPluginManager().registerEvents(new Events(), this);
-        Bukkit.getPluginManager().registerEvents(new ClickEvents(), this);
-        Bukkit.getPluginManager().registerEvents(new InteractEvents(), this);
-        Bukkit.getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new Events(), this);
+        getServer().getPluginManager().registerEvents(new ClickEvents(), this);
+        getServer().getPluginManager().registerEvents(new InteractEvents(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
 
         initializeItems();
     }
@@ -92,21 +95,6 @@ public class Practice extends JavaPlugin implements Listener {
         return true;
     }
 
-    @EventHandler
-    public void onClick(InventoryClickEvent event) {
-        if (specInv.contains((Player) event.getWhoClicked()))
-            event.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent event) {
-        if (specInv.contains((Player) event.getPlayer()))
-            specInv.remove((Player) event.getPlayer());
-    }
-
-    // On disable
-
-    @SuppressWarnings("deprecation")
     @Override
     public void onDisable() {
         for (Player pl : Bukkit.getOnlinePlayers())
@@ -114,8 +102,6 @@ public class Practice extends JavaPlugin implements Listener {
 
         Bukkit.getScheduler().cancelTasks(this);
     }
-
-    // Spawn items
 
     private ItemStack rankedItem;
     private ItemStack TeamsItem;
@@ -194,47 +180,5 @@ public class Practice extends JavaPlugin implements Listener {
     public void heal(Player player) {
         player.setFireTicks(0);
         player.setHealth(((Damageable) player).getMaxHealth());
-    }
-
-    {
-
-    }
-
-
-    {
-
-        {
-
-
-        }
-
-        {
-
-        }
-    }
-
-    private List<String> cloneAndReplace(List<String> list, Var... vars) {
-        List<String> cloned = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-            String str = list.get(i);
-
-            for (Var v : vars)
-                str = str.replace(v.var, v.repl);
-
-            cloned.add(str);
-        }
-
-        return cloned;
-    }
-
-    class Var {
-        public final String var;
-        public final String repl;
-
-        public Var(String var, Object repl) {
-            this.var = var;
-            this.repl = String.valueOf(repl);
-        }
     }
 }
