@@ -1,0 +1,4 @@
+name: Practice
+main: net.arion.arioncore.ArionCore
+version: 1.0.0-SNAPSHOT
+author: Arion
