@@ -6,6 +6,7 @@ import org.bukkit.SkullType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Arrays;
 
@@ -26,6 +27,7 @@ public class HeadBuilder {
 
     public HeadBuilder(String name, int amount) {
         this.item = new ItemStack(Material.SKULL_ITEM, amount, (short) SkullType.PLAYER.ordinal());
+        ((SkullMeta) item.getItemMeta()).setOwner(name);
     }
 
     public HeadBuilder withAmount(int amount) {

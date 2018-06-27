@@ -1,8 +1,8 @@
-package net.arion.arioncore.api.permission;
+package net.arion.arioncore.api.player;
 
 import org.bukkit.ChatColor;
 
-public enum Rank {
+public enum ArionPlayerRank {
     PLAYER("Player", ChatColor.GRAY, 0),
     ADMIN("Admin", ChatColor.RED, 100);
 
@@ -10,7 +10,7 @@ public enum Rank {
     private ChatColor color;
     private int power;
 
-    Rank(String name, ChatColor color, int power) {
+    ArionPlayerRank(String name, ChatColor color, int power) {
         this.name = name;
         this.color = color;
         this.power = power;

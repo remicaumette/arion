@@ -1,7 +1,7 @@
 package net.arion.arioncore.api.command;
 
-import net.arion.arioncore.api.player.ArionPlayer;
 import net.arion.arioncore.api.command.exception.CommandException;
+import net.arion.arioncore.api.player.ArionPlayer;
 
 import java.util.Collection;
 

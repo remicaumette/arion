@@ -1,6 +1,7 @@
 package net.arion.arioncore.api;
 
 import net.arion.arioncore.api.command.ArionCommandManager;
+import net.arion.arioncore.api.gui.ArionGuiManager;
 import net.arion.arioncore.api.player.ArionPlayerManager;
 
 import java.util.logging.Logger;
@@ -20,6 +21,10 @@ public class ArionApi {
         return impl.getCommandManager();
     }
 
+    public static ArionGuiManager getGuiManager() {
+        return impl.getGuiManager();
+    }
+
     public static void setImpl(Impl impl) {
         ArionApi.impl = impl;
     }
@@ -30,5 +35,7 @@ public class ArionApi {
         ArionPlayerManager getPlayerManager();
 
         ArionCommandManager getCommandManager();
+
+        ArionGuiManager getGuiManager();
     }
 }

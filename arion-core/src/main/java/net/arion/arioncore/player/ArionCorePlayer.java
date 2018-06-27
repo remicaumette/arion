@@ -1,8 +1,8 @@
 package net.arion.arioncore.player;
 
 import net.arion.arioncore.api.lang.Lang;
-import net.arion.arioncore.api.permission.Rank;
 import net.arion.arioncore.api.player.ArionPlayer;
+import net.arion.arioncore.api.player.ArionPlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,9 +13,9 @@ public class ArionCorePlayer implements ArionPlayer {
     private UUID uniqueId;
     private String name;
     private Lang lang;
-    private Rank rank;
+    private ArionPlayerRank rank;
 
-    public ArionCorePlayer(UUID uniqueId, String name, Lang lang, Rank rank) {
+    public ArionCorePlayer(UUID uniqueId, String name, Lang lang, ArionPlayerRank rank) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.lang = lang;
@@ -43,12 +43,12 @@ public class ArionCorePlayer implements ArionPlayer {
     }
 
     @Override
-    public Rank getRank() {
+    public ArionPlayerRank getRank() {
         return rank;
     }
 
     @Override
-    public void setRank(Rank rank) {
+    public void setRank(ArionPlayerRank rank) {
         this.rank = rank;
     }
 

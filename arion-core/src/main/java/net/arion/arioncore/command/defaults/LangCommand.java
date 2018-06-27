@@ -7,7 +7,6 @@ import net.arion.arioncore.api.command.exception.InvalidUsageException;
 import net.arion.arioncore.api.lang.Lang;
 import net.arion.arioncore.api.player.ArionPlayer;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -15,7 +14,7 @@ public class LangCommand extends ArionCommand {
     public LangCommand() {
         super("lang");
         setUsage("/lang <fr|en>");
-        setAliases(Arrays.asList("lng", "langs"));
+        setAliases("langs");
     }
 
     @Override

@@ -1,9 +1,11 @@
 package net.arion.arioncore.player;
 
 import net.arion.arioncore.ArionCore;
+import net.arion.arioncore.api.event.ArionPlayerJoinEvent;
+import net.arion.arioncore.api.event.ArionPlayerQuitEvent;
 import net.arion.arioncore.api.lang.Lang;
-import net.arion.arioncore.api.permission.Rank;
 import net.arion.arioncore.api.player.ArionPlayerManager;
+import net.arion.arioncore.api.player.ArionPlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -52,17 +54,21 @@ public class ArionCorePlayerManager implements ArionPlayerManager {
         }
     }
 
-    public void onJoin(Player player) {
-        ArionCorePlayer practicePlayer = new ArionCorePlayer(
-                player.getUniqueId(),
-                player.getName(),
+    public void onJoin(Player bukkitPlayer) {
+        ArionCorePlayer player = new ArionCorePlayer(
+                bukkitPlayer.getUniqueId(),
+                bukkitPlayer.getName(),
                 Lang.FRENCH,
-                Rank.ADMIN);
+                ArionPlayerRank.ADMIN);
 
-        players.put(player.getUniqueId(), practicePlayer);
+        players.put(player.getUniqueId(), player);
+        plugin.getServer().getPluginManager().callEvent(new ArionPlayerJoinEvent(player));
     }
 
-    public void onQuit(Player player) {
+    public void onQuit(Player bukkitPlayer) {
+        ArionCorePlayer player = getPlayer(bukkitPlayer);
+
+        plugin.getServer().getPluginManager().callEvent(new ArionPlayerQuitEvent(player));
         players.remove(player.getUniqueId());
     }
 }
