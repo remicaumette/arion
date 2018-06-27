@@ -1,44 +1,57 @@
 package net.arion.arioncore;
 
-import net.arion.arioncore.api.PracticeApi;
-import net.arion.arioncore.command.CoreCommandManager;
+import net.arion.arioncore.api.ArionApi;
+import net.arion.arioncore.api.event.ArionServerTickEvent;
+import net.arion.arioncore.command.ArionCoreCommandManager;
+import net.arion.arioncore.command.defaults.LangCommand;
+import net.arion.arioncore.command.defaults.MessageCommand;
 import net.arion.arioncore.listener.PlayerListener;
-import net.arion.arioncore.player.CorePlayerManager;
-import org.bukkit.event.Listener;
+import net.arion.arioncore.player.ArionCorePlayerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ArionCore extends JavaPlugin implements Listener, PracticeApi.Impl {
-    private CorePlayerManager playerManager;
-    private CoreCommandManager commandManager;
+public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
+    private ArionCorePlayerManager playerManager;
+    private ArionCoreCommandManager commandManager;
+    private long ticks;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
-        playerManager = new CorePlayerManager(this);
-        commandManager = new CoreCommandManager(this);
+        playerManager = new ArionCorePlayerManager(this);
+        commandManager = new ArionCoreCommandManager(this);
 
         playerManager.onEnable();
+        commandManager.registerCommand(new MessageCommand());
+        commandManager.registerCommand(new LangCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
-        PracticeApi.setImpl(this);
+        getServer().getScheduler().runTaskTimer(this, this, 0L, 1L);
+
+        ArionApi.setImpl(this);
     }
 
     @Override
     public void onDisable() {
         playerManager.onDisable();
 
-        PracticeApi.setImpl(null);
+        System.gc();
+        ArionApi.setImpl(null);
     }
 
     @Override
-    public CorePlayerManager getPlayerManager() {
+    public void run() {
+        getServer().getPluginManager().callEvent(new ArionServerTickEvent(ticks++));
+    }
+
+    @Override
+    public ArionCorePlayerManager getPlayerManager() {
         return playerManager;
     }
 
     @Override
-    public CoreCommandManager getCommandManager() {
+    public ArionCoreCommandManager getCommandManager() {
         return commandManager;
     }
 }

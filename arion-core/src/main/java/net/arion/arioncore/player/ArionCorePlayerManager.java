@@ -3,7 +3,7 @@ package net.arion.arioncore.player;
 import net.arion.arioncore.ArionCore;
 import net.arion.arioncore.api.lang.Lang;
 import net.arion.arioncore.api.permission.Rank;
-import net.arion.arioncore.api.player.PracticePlayerManager;
+import net.arion.arioncore.api.player.ArionPlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -12,27 +12,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class CorePlayerManager implements PracticePlayerManager {
+public class ArionCorePlayerManager implements ArionPlayerManager {
     private ArionCore plugin;
-    private Map<UUID, CorePlayer> players;
+    private Map<UUID, ArionCorePlayer> players;
 
-    public CorePlayerManager(ArionCore plugin) {
+    public ArionCorePlayerManager(ArionCore plugin) {
         this.plugin = plugin;
         this.players = new HashMap<>();
     }
 
     @Override
-    public Collection<CorePlayer> getPlayers() {
+    public Collection<ArionCorePlayer> getPlayers() {
         return players.values();
     }
 
     @Override
-    public CorePlayer getPlayer(Player player) {
+    public ArionCorePlayer getPlayer(Player player) {
         return getPlayer(player.getUniqueId());
     }
 
     @Override
-    public CorePlayer getPlayer(UUID uniqueId) {
+    public ArionCorePlayer getPlayer(UUID uniqueId) {
         return players.get(uniqueId);
     }
 
@@ -53,10 +53,10 @@ public class CorePlayerManager implements PracticePlayerManager {
     }
 
     public void onJoin(Player player) {
-        CorePlayer practicePlayer = new CorePlayer(
+        ArionCorePlayer practicePlayer = new ArionCorePlayer(
                 player.getUniqueId(),
                 player.getName(),
-                Lang.ENGLISH,
+                Lang.FRENCH,
                 Rank.ADMIN);
 
         players.put(player.getUniqueId(), practicePlayer);

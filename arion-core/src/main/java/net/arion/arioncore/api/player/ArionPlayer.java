@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public interface PracticePlayer {
+public interface ArionPlayer {
     UUID getUniqueId();
 
     String getName();
@@ -19,11 +19,9 @@ public interface PracticePlayer {
 
     void setRank(Rank rank);
 
-    long getLastEnderPearl();
-
-    void setLastEnderPearl(long lastEnderPearl);
-
     Player getBukkitPlayer();
 
-    void heal();
+    void sendRawMessage(String message);
+
+    void sendMessage(String key, String... values);
 }

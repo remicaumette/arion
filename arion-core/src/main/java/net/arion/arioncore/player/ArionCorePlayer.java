@@ -2,20 +2,20 @@ package net.arion.arioncore.player;
 
 import net.arion.arioncore.api.lang.Lang;
 import net.arion.arioncore.api.permission.Rank;
-import net.arion.arioncore.api.player.PracticePlayer;
+import net.arion.arioncore.api.player.ArionPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class CorePlayer implements PracticePlayer {
+public class ArionCorePlayer implements ArionPlayer {
+    private Player bukkitPlayer;
     private UUID uniqueId;
     private String name;
     private Lang lang;
     private Rank rank;
-    private long lastEnderPearl;
 
-    public CorePlayer(UUID uniqueId, String name, Lang lang, Rank rank) {
+    public ArionCorePlayer(UUID uniqueId, String name, Lang lang, Rank rank) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.lang = lang;
@@ -53,25 +53,20 @@ public class CorePlayer implements PracticePlayer {
     }
 
     @Override
-    public long getLastEnderPearl() {
-        return lastEnderPearl;
-    }
-
-    @Override
-    public void setLastEnderPearl(long lastEnderPearl) {
-        this.lastEnderPearl = lastEnderPearl;
-    }
-
-    @Override
     public Player getBukkitPlayer() {
-        return Bukkit.getPlayer(uniqueId);
+        if (bukkitPlayer == null) {
+            bukkitPlayer = Bukkit.getPlayer(uniqueId);
+        }
+        return bukkitPlayer;
     }
 
     @Override
-    public void heal() {
-        Player player = getBukkitPlayer();
+    public void sendRawMessage(String message) {
+        getBukkitPlayer().sendMessage(message);
+    }
 
-        player.setFireTicks(0);
-        player.setHealth(player.getMaxHealth());
+    @Override
+    public void sendMessage(String key, String... values) {
+        sendRawMessage(lang.tl(key, values));
     }
 }

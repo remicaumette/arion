@@ -1,7 +1,23 @@
 package net.arion.arioncore.api.command.exception;
 
 public class CommandException extends Exception {
-    public CommandException(String message) {
-        super(message);
+    private String key;
+    private String[] values;
+
+    public CommandException() {
+        this("error.basic");
+    }
+
+    public CommandException(String key, String... values) {
+        this.key = key;
+        this.values = values;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String[] getValues() {
+        return values;
     }
 }

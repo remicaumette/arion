@@ -1,11 +1,12 @@
 package net.arion.arioncore.api.lang;
 
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import net.arion.arioncore.api.ArionApi;
 
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public enum Lang {
     FRENCH("Français", "FR"),
@@ -13,13 +14,21 @@ public enum Lang {
 
     private String name;
     private String code;
-    private Configuration config;
+    private Map<String, String> sentences;
 
     Lang(String name, String code) {
         this.name = name;
         this.code = code;
-        Reader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(name().toLowerCase() +".yml"));
-        this.config = YamlConfiguration.loadConfiguration(reader);
+        this.sentences = new HashMap<>();
+
+        try {
+            Properties properties = new Properties();
+            properties.load(getClass().getClassLoader().getResourceAsStream(name().toLowerCase() + ".properties"));
+            properties.stringPropertyNames()
+                    .forEach(property -> sentences.put(property, properties.getProperty(property)));
+        } catch (IOException e) {
+            ArionApi.getLogger().severe("Unable to load the " + name().toLowerCase() + " properties file.");
+        }
     }
 
     public String getName() {
@@ -31,12 +40,14 @@ public enum Lang {
     }
 
     public String tl(String key, String... values) {
-        String value = config.getString(key);
+        String value = sentences.get(key);
+
         if (value != null) {
             value = value.replaceAll("&", "§");
             MessageFormat messageFormat = new MessageFormat(value);
             return messageFormat.format(values);
         }
+
         return key;
     }
 }

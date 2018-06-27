@@ -1,10 +1,11 @@
 package net.arion.arioncore.command;
 
 import net.arion.arioncore.ArionCore;
-import net.arion.arioncore.api.command.PracticeCommandArguments;
+import net.arion.arioncore.api.command.ArionCommandArguments;
+import net.arion.arioncore.api.command.exception.ArgumentNotFoundException;
 import net.arion.arioncore.api.command.exception.CommandException;
 import net.arion.arioncore.api.command.exception.PlayerNotFoundException;
-import net.arion.arioncore.player.CorePlayer;
+import net.arion.arioncore.player.ArionCorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,11 +14,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class CoreCommandArguments implements PracticeCommandArguments {
+public class ArionCoreCommandArguments implements ArionCommandArguments {
     private ArionCore plugin;
     private List<String> arguments;
 
-    public CoreCommandArguments(ArionCore plugin, String[] arguments) {
+    public ArionCoreCommandArguments(ArionCore plugin, String[] arguments) {
         this.plugin = plugin;
         this.arguments = Arrays.asList(arguments);
     }
@@ -30,13 +31,13 @@ public class CoreCommandArguments implements PracticeCommandArguments {
     @Override
     public String getString(int index) throws CommandException {
         if (arguments.size() <= index) {
-            throw new CommandException("arg not found");
+            throw new ArgumentNotFoundException(index);
         }
         return arguments.get(index);
     }
 
     @Override
-    public CorePlayer getPlayer(int index) throws CommandException {
+    public ArionCorePlayer getPlayer(int index) throws CommandException {
         String playerName = getString(index);
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
