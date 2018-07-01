@@ -1,0 +1,4 @@
+name: OrionCore
+main: net.orion.orioncore.OrionCore
+version: 1.0.0-SNAPSHOT
+author: Orion
