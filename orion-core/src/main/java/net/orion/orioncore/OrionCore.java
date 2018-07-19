@@ -2,6 +2,8 @@ package net.orion.orioncore;
 
 import net.orion.orioncore.api.OrionApi;
 import net.orion.orioncore.api.event.OrionServerTickEvent;
+import net.orion.orioncore.api.lang.Lang;
+import net.orion.orioncore.api.scoreboard.OrionScoreboardManager;
 import net.orion.orioncore.command.OrionCoreCommandManager;
 import net.orion.orioncore.command.defaults.LangCommand;
 import net.orion.orioncore.command.defaults.MessageCommand;
@@ -11,21 +13,26 @@ import net.orion.orioncore.gui.defaults.SettingsGui;
 import net.orion.orioncore.listener.InventoryListener;
 import net.orion.orioncore.listener.PlayerListener;
 import net.orion.orioncore.player.OrionCorePlayerManager;
+import net.orion.orioncore.scoreboard.OrionCoreScoreboardManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class OrionCore extends JavaPlugin implements OrionApi.Impl, Runnable {
     private OrionCorePlayerManager playerManager;
     private OrionCoreCommandManager commandManager;
     private OrionCoreGuiManager guiManager;
+    private OrionCoreScoreboardManager scoreboardManager;
     private long ticks;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
+        Lang.importTranslationFromPlugin(this);
+
         playerManager = new OrionCorePlayerManager(this);
         commandManager = new OrionCoreCommandManager(this);
         guiManager = new OrionCoreGuiManager(this);
+        scoreboardManager = new OrionCoreScoreboardManager(this);
 
         playerManager.onEnable();
 
@@ -48,8 +55,8 @@ public class OrionCore extends JavaPlugin implements OrionApi.Impl, Runnable {
         guiManager.onDisable();
         playerManager.onDisable();
 
-        System.gc();
         OrionApi.setImpl(null);
+        System.gc();
     }
 
     @Override
@@ -70,5 +77,10 @@ public class OrionCore extends JavaPlugin implements OrionApi.Impl, Runnable {
     @Override
     public OrionCoreGuiManager getGuiManager() {
         return guiManager;
+    }
+
+    @Override
+    public OrionScoreboardManager getScoreboardManager() {
+        return scoreboardManager;
     }
 }

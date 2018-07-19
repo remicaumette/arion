@@ -6,6 +6,8 @@ import net.orion.orioncore.api.player.OrionPlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 public class OrionCorePlayer implements OrionPlayer {
@@ -14,12 +16,19 @@ public class OrionCorePlayer implements OrionPlayer {
     private String name;
     private Lang lang;
     private OrionPlayerRank rank;
+    private Date loggedAt;
+    private Date joinedAt;
+    private Map<String, Object> data;
 
-    public OrionCorePlayer(UUID uniqueId, String name, Lang lang, OrionPlayerRank rank) {
+    public OrionCorePlayer(UUID uniqueId, String name, Lang lang, OrionPlayerRank rank, Date loggedAt, Date joinedAt,
+                           Map<String, Object> data) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.lang = lang;
         this.rank = rank;
+        this.loggedAt = loggedAt;
+        this.joinedAt = joinedAt;
+        this.data = data;
     }
 
     @Override
@@ -50,6 +59,21 @@ public class OrionCorePlayer implements OrionPlayer {
     @Override
     public void setRank(OrionPlayerRank rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public Date getLoggedAt() {
+        return loggedAt;
+    }
+
+    @Override
+    public Date getJoinedAt() {
+        return joinedAt;
+    }
+
+    @Override
+    public Map<String, Object> getData() {
+        return data;
     }
 
     @Override

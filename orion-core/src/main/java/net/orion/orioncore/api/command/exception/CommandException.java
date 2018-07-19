@@ -1,5 +1,8 @@
 package net.orion.orioncore.api.command.exception;
 
+/**
+ * Quand une erreur s'est produite lors de l'execution de la commande.
+ */
 public class CommandException extends Exception {
     private String key;
     private String[] values;

@@ -16,14 +16,23 @@ public enum OrionPlayerRank {
         this.power = power;
     }
 
+    /**
+     * @return Le nom du rang.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return La couleur liée au rang.
+     */
     public ChatColor getColor() {
         return color;
     }
 
+    /**
+     * @return Les droits du joueur.
+     */
     public int getPower() {
         return power;
     }

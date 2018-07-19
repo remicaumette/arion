@@ -62,6 +62,9 @@ public enum Head {
         this.name = name;
     }
 
+    /**
+     * @return Le pseudo lié à la tête.
+     */
     public String getName() {
         return name;
     }
