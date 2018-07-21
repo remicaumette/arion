@@ -9,10 +9,7 @@ import net.orion.orioncore.api.player.OrionPlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class OrionCorePlayerManager implements OrionPlayerManager {
     private OrionCore plugin;
@@ -55,11 +52,21 @@ public class OrionCorePlayerManager implements OrionPlayerManager {
     }
 
     public void onJoin(Player bukkitPlayer) {
-        OrionCorePlayer player = new OrionCorePlayer(
-                bukkitPlayer.getUniqueId(),
-                bukkitPlayer.getName(),
-                Lang.FRENCH,
-                OrionPlayerRank.ADMIN);
+        OrionCorePlayer player = plugin.getDatabase().find(OrionCorePlayer.class)
+                .where()
+                    .idEq(bukkitPlayer.getUniqueId().toString())
+                .findUnique();
+        if (player == null) {
+            player = new OrionCorePlayer();
+            player.setUniqueId(bukkitPlayer.getUniqueId());
+            player.setName(bukkitPlayer.getName());
+            player.setLang(Lang.FRENCH);
+            player.setRank(OrionPlayerRank.PLAYER);
+            player.setFirstConnection(new Date());
+        }
+
+        player.setData(new HashMap<>());
+        player.setLastConnection(new Date());
 
         players.put(player.getUniqueId(), player);
         plugin.getServer().getPluginManager().callEvent(new OrionPlayerJoinEvent(player));
@@ -69,6 +76,7 @@ public class OrionCorePlayerManager implements OrionPlayerManager {
         OrionCorePlayer player = getPlayer(bukkitPlayer);
 
         plugin.getServer().getPluginManager().callEvent(new OrionPlayerQuitEvent(player));
+        plugin.getDatabase().save(player);
         players.remove(player.getUniqueId());
     }
 }

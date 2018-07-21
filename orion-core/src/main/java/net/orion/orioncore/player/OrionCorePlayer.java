@@ -6,29 +6,35 @@ import net.orion.orioncore.api.player.OrionPlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Entity
+@Table(name = "players")
 public class OrionCorePlayer implements OrionPlayer {
-    private Player bukkitPlayer;
+    @Id
+    @Column(name = "id")
     private UUID uniqueId;
+    @Column(name = "name")
     private String name;
+    @Column(name = "lang")
+    @Enumerated(EnumType.STRING)
     private Lang lang;
+    @Column(name = "rank")
+    @Enumerated(EnumType.STRING)
     private OrionPlayerRank rank;
-    private Date loggedAt;
-    private Date joinedAt;
-    private Map<String, Object> data;
+    @Column(name = "last_connection")
+    private Date lastConnection;
+    @Column(name = "first_connection")
+    private Date firstConnection;
+    // FIELDS NON PERSISTANT
+    private transient Player bukkitPlayer;
+    private transient Map<String, Object> data;
 
-    public OrionCorePlayer(UUID uniqueId, String name, Lang lang, OrionPlayerRank rank, Date loggedAt, Date joinedAt,
-                           Map<String, Object> data) {
-        this.uniqueId = uniqueId;
-        this.name = name;
-        this.lang = lang;
-        this.rank = rank;
-        this.loggedAt = loggedAt;
-        this.joinedAt = joinedAt;
-        this.data = data;
+    public OrionCorePlayer() {
     }
 
     @Override
@@ -36,9 +42,17 @@ public class OrionCorePlayer implements OrionPlayer {
         return uniqueId;
     }
 
+    public void setUniqueId(UUID uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -62,18 +76,30 @@ public class OrionCorePlayer implements OrionPlayer {
     }
 
     @Override
-    public Date getLoggedAt() {
-        return loggedAt;
+    public Date getLastConnection() {
+        return lastConnection;
+    }
+
+    public void setLastConnection(Date lastConnection) {
+        this.lastConnection = lastConnection;
     }
 
     @Override
-    public Date getJoinedAt() {
-        return joinedAt;
+    public Date getFirstConnection() {
+        return firstConnection;
+    }
+
+    public void setFirstConnection(Date firstConnection) {
+        this.firstConnection = firstConnection;
     }
 
     @Override
     public Map<String, Object> getData() {
         return data;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
     }
 
     @Override

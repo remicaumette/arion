@@ -6,8 +6,6 @@ import net.orion.orioncore.api.command.exception.ArgumentNotFoundException;
 import net.orion.orioncore.api.command.exception.CommandException;
 import net.orion.orioncore.api.command.exception.PlayerNotFoundException;
 import net.orion.orioncore.player.OrionCorePlayer;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,10 +36,12 @@ public class OrionCoreCommandArguments implements OrionCommandArguments {
     @Override
     public OrionCorePlayer getPlayer(int index) throws CommandException {
         String playerName = getString(index);
-        Player player = Bukkit.getPlayer(playerName);
-        if (player == null) {
-            throw new PlayerNotFoundException(playerName);
-        }
-        return plugin.getPlayerManager().getPlayer(player);
+
+        return plugin.getPlayerManager()
+                .getPlayers()
+                .stream()
+                .filter(player -> player.getName().equalsIgnoreCase(playerName))
+                .findFirst()
+                .orElseThrow(() -> new PlayerNotFoundException(playerName));
     }
 }

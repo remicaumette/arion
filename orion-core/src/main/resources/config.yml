@@ -1,0 +1,11 @@
+# For production
+#database:
+#  driver: postgres
+#  url: localhost/database
+#  username: root
+#  password: root
+
+# For development
+database:
+  driver: sqlite
+  filename: dev.db

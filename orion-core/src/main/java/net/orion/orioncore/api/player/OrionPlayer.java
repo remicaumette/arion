@@ -45,12 +45,12 @@ public interface OrionPlayer {
     /**
      * @return Quand le joueur s'est connecté.
      */
-    Date getLoggedAt();
+    Date getLastConnection();
 
     /**
      * @return Quand le joueur a rejoint pour la première fois le serveur.
      */
-    Date getJoinedAt();
+    Date getFirstConnection();
 
     /**
      * @return Contient les données temporaire du joueur.
