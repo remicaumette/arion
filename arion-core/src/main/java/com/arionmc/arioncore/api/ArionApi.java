@@ -1,10 +1,11 @@
 package com.arionmc.arioncore.api;
 
-import com.arionmc.arioncore.api.gui.ArionGuiManager;
 import com.arionmc.arioncore.api.command.ArionCommandManager;
+import com.arionmc.arioncore.api.display.ArionDisplayManager;
+import com.arionmc.arioncore.api.gui.ArionGuiManager;
 import com.arionmc.arioncore.api.player.ArionPlayerManager;
-import com.arionmc.arioncore.api.scoreboard.ArionScoreboardManager;
 
+import javax.sql.DataSource;
 import java.util.logging.Logger;
 
 public class ArionApi {
@@ -15,6 +16,13 @@ public class ArionApi {
      */
     public static Logger getLogger() {
         return impl.getLogger();
+    }
+
+    /**
+     * @return La connexion à la base de données.
+     */
+    public static DataSource getDataSource() {
+        return impl.getDataSource();
     }
 
     /**
@@ -39,10 +47,10 @@ public class ArionApi {
     }
 
     /**
-     * @return Le gestionnaire des interfaces.
+     * @return Le gestionnaire des affichages.
      */
-    public static ArionScoreboardManager getScoreboardManager() {
-        return impl.getScoreboardManager();
+    public static ArionDisplayManager getDisplayManager() {
+        return impl.getDisplayManager();
     }
 
     /**
@@ -61,6 +69,11 @@ public class ArionApi {
         Logger getLogger();
 
         /**
+         * @return La connexion à la base de données.
+         */
+        DataSource getDataSource();
+
+        /**
          * @return Le gestionnaire des joueurs.
          */
         ArionPlayerManager getPlayerManager();
@@ -76,8 +89,8 @@ public class ArionApi {
         ArionGuiManager getGuiManager();
 
         /**
-         * @return Le gestionnaire des scoreboards.
+         * @return Le gestionnaire des affichages.
          */
-        ArionScoreboardManager getScoreboardManager();
+        ArionDisplayManager getDisplayManager();
     }
 }

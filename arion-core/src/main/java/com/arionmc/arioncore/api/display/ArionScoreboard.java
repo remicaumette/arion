@@ -1,12 +1,12 @@
-package com.arionmc.arioncore.api.scoreboard;
+package com.arionmc.arioncore.api.display;
 
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
-public abstract class ArionScoreboard {
+public interface ArionScoreboard {
     /**
      * Applique le scoreboard sur un joueur.
      *
      * @param player Le joueur.
      */
-    public abstract void apply(ArionPlayer player);
+    void apply(ArionPlayer player);
 }

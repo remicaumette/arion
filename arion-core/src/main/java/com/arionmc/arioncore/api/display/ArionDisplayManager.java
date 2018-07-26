@@ -1,6 +1,6 @@
-package com.arionmc.arioncore.api.scoreboard;
+package com.arionmc.arioncore.api.display;
 
-public interface ArionScoreboardManager {
+public interface ArionDisplayManager {
     /**
      * Défini le scoreboard.
      *
