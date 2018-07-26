@@ -1,4 +1,4 @@
 name: ArionCore
-main: ArionCore
+main: com.arionmc.arioncore.ArionCore
 version: 1.0.0-SNAPSHOT
-author: Orion
+author: ArionMC
