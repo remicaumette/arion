@@ -7,7 +7,6 @@ import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.command.ArionCoreCommandManager;
 import com.arionmc.arioncore.command.defaults.LangCommand;
 import com.arionmc.arioncore.command.defaults.MessageCommand;
-import com.arionmc.arioncore.command.defaults.SettingsCommand;
 import com.arionmc.arioncore.display.ArionCoreDisplayManager;
 import com.arionmc.arioncore.gui.ArionCoreGuiManager;
 import com.arionmc.arioncore.gui.defaults.SettingsGui;
@@ -17,8 +16,6 @@ import com.arionmc.arioncore.player.ArionCorePlayerManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Level;
 
 public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
     private HikariDataSource dataSource;
