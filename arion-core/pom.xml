@@ -21,6 +21,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>aikar-repo</id>
+            <url>https://repo.aikar.co/nexus/content/repositories/aikar/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -46,8 +50,7 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
-            <systemPath>/Users/remi/Documents/Workspace/arion/server/spigot.jar</systemPath>
-            <scope>system</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -3,11 +3,12 @@ jdk: oraclejdk8
 script:
   - cd arion-core
   - mvn clean install
+  - cd ..
 deploy:
   provider: releases
-  api_key: $GITHUB_KEY
+  api_key:
+    secure: $GITHUB_KEY
   skip_cleanup: true
-  file:
-    - ./arion-core/target/ArionCore.jar
+  file: ./arion-core/target/ArionCore.jar
   on:
-    all_branches: true
+    tags: true

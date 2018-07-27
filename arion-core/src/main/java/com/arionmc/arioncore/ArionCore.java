@@ -41,7 +41,6 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
 
         commandManager.registerCommand(new MessageCommand());
         commandManager.registerCommand(new LangCommand());
-        commandManager.registerCommand(new SettingsCommand());
 
         guiManager.registerGui(new SettingsGui());
 
