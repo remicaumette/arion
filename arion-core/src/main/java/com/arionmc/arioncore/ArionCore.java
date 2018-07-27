@@ -7,9 +7,9 @@ import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.command.ArionCoreCommandManager;
 import com.arionmc.arioncore.command.defaults.LangCommand;
 import com.arionmc.arioncore.command.defaults.MessageCommand;
+import com.arionmc.arioncore.command.defaults.ReplyCommand;
 import com.arionmc.arioncore.display.ArionCoreDisplayManager;
 import com.arionmc.arioncore.gui.ArionCoreGuiManager;
-import com.arionmc.arioncore.gui.defaults.SettingsGui;
 import com.arionmc.arioncore.listener.InventoryListener;
 import com.arionmc.arioncore.listener.PlayerListener;
 import com.arionmc.arioncore.player.ArionCorePlayerManager;
@@ -41,8 +41,7 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
 
         commandManager.registerCommand(new MessageCommand());
         commandManager.registerCommand(new LangCommand());
-
-        guiManager.registerGui(new SettingsGui());
+        commandManager.registerCommand(new ReplyCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
@@ -100,7 +99,6 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         config.setJdbcUrl(getConfig().getString("database.url"));
         config.setUsername(getConfig().getString("database.username"));
         config.setPassword(getConfig().getString("database.password"));
-        config.setMinimumIdle(5);
 
         return new HikariDataSource(config);
     }

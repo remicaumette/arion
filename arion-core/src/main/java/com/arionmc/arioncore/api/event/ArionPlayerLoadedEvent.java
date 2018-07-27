@@ -5,13 +5,13 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * Cet événement est appelé quand le joueur est connecté.
+ * Cet événement est appelé quand les données du joueur sont chargés.
  */
-public class ArionPlayerJoinEvent extends Event {
+public class ArionPlayerLoadedEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private ArionPlayer player;
 
-    public ArionPlayerJoinEvent(ArionPlayer player) {
+    public ArionPlayerLoadedEvent(ArionPlayer player) {
         this.player = player;
     }
 

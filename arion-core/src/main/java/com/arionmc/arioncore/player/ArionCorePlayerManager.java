@@ -2,7 +2,9 @@ package com.arionmc.arioncore.player;
 
 import com.arionmc.arioncore.ArionCore;
 import com.arionmc.arioncore.api.event.ArionPlayerJoinEvent;
+import com.arionmc.arioncore.api.event.ArionPlayerLoadedEvent;
 import com.arionmc.arioncore.api.event.ArionPlayerQuitEvent;
+import com.arionmc.arioncore.api.event.ArionPlayerSavedEvent;
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.api.player.ArionPlayerManager;
 import com.arionmc.arioncore.api.player.ArionPlayerRank;
@@ -43,7 +45,7 @@ public class ArionCorePlayerManager implements ArionPlayerManager {
         plugin.getLogger().info("Enabling player manager...");
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            onJoin(player);
+            loadPlayer(player);
         }
     }
 
@@ -56,16 +58,37 @@ public class ArionCorePlayerManager implements ArionPlayerManager {
                 .toArray(CompletableFuture<?>[]::new));
     }
 
-    public void onJoin(Player bukkitPlayer) {
-        repository.findOne(bukkitPlayer.getUniqueId())
+    public CompletableFuture<ArionCorePlayer> loadPlayer(Player bukkitPlayer) {
+        return repository.findOne(bukkitPlayer.getUniqueId())
                 .thenApply(player -> {
                     if (player == null) {
                         Date date = new Date();
                         return new ArionCorePlayer(bukkitPlayer.getUniqueId(), bukkitPlayer.getName(),
                                 Lang.FRENCH, ArionPlayerRank.PLAYER, date, date);
                     }
+
                     return player;
                 })
+                .thenApply(player -> {
+                    plugin.getLogger().info("Player " + player.getName() + " loaded!");
+                    plugin.getServer().getPluginManager().callEvent(new ArionPlayerLoadedEvent(player));
+
+                    return player;
+                });
+    }
+
+    public CompletableFuture<ArionCorePlayer> savePlayer(Player bukkitPlayer) {
+        return repository.createOrUpdate(getPlayer(bukkitPlayer))
+                .thenApply(player -> {
+                    plugin.getLogger().info("Player " + player.getName() + " saved!");
+                    plugin.getServer().getPluginManager().callEvent(new ArionPlayerSavedEvent(player));
+
+                    return player;
+                });
+    }
+
+    public void onJoin(Player bukkitPlayer) {
+        loadPlayer(bukkitPlayer)
                 .thenAccept(player -> {
                     players.put(player.getUniqueId(), player);
                     plugin.getServer().getPluginManager().callEvent(new ArionPlayerJoinEvent(player));
@@ -77,9 +100,9 @@ public class ArionCorePlayerManager implements ArionPlayerManager {
 
         if (player != null) {
             plugin.getServer().getPluginManager().callEvent(new ArionPlayerQuitEvent(player));
-            players.remove(player.getUniqueId());
 
-            repository.createOrUpdate(player);
+            savePlayer(bukkitPlayer)
+                    .thenAccept(savedPlayer -> players.remove(savedPlayer.getUniqueId()));
         }
     }
 }

@@ -16,7 +16,7 @@ public enum Lang {
 
     private String name;
     private String code;
-    private static Map<String, String> sentences = new HashMap<>();
+    private Map<String, String> sentences = new HashMap<>();
 
     Lang(String name, String code) {
         this.name = name;
@@ -67,7 +67,7 @@ public enum Lang {
                 Properties properties = new Properties();
                 properties.load(plugin.getResource(lang.name().toLowerCase() + ".properties"));
                 properties.stringPropertyNames()
-                        .forEach(property -> sentences.put(property, properties.getProperty(property)));
+                        .forEach(property -> lang.sentences.put(property, properties.getProperty(property)));
             } catch (IOException e) {
                 ArionApi.getLogger()
                         .warning("Unable to load the " + lang.name().toLowerCase() + " properties file.");
