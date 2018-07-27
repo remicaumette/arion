@@ -8,5 +8,5 @@ public interface ArionScoreboard {
      *
      * @param player Le joueur.
      */
-    void apply(ArionPlayer player);
+    void applyScoreboard(ArionPlayer player);
 }

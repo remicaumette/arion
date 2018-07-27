@@ -7,4 +7,18 @@ public interface ArionDisplayManager {
      * @param scoreboard Le scoreboard à utiliser.
      */
     void setScoreboard(ArionScoreboard scoreboard);
+
+    /**
+     * Défini le format du nametag.
+     *
+     * @param nametagFormatter Le format du nametag.
+     */
+    void setNametag(ArionNametagFormatter nametagFormatter);
+
+    /**
+     * Défini le format du chat.
+     *
+     * @param chatFormatter Le format du chat.
+     */
+    void setChatFormatter(ArionChatFormatter chatFormatter);
 }
