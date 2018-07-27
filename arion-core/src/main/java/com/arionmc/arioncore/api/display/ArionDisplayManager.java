@@ -13,7 +13,7 @@ public interface ArionDisplayManager {
      *
      * @param nametagFormatter Le format du nametag.
      */
-    void setNametag(ArionNametagFormatter nametagFormatter);
+    void setNametagFormatter(ArionNametagFormatter nametagFormatter);
 
     /**
      * Défini le format du chat.

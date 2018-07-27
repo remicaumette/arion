@@ -4,9 +4,18 @@ import com.arionmc.arioncore.api.player.ArionPlayer;
 
 public interface ArionScoreboard {
     /**
-     * Applique le scoreboard sur un joueur.
+     * Défini le titre du scoreboard en fonction du joueur.
      *
      * @param player Le joueur.
+     * @return Le titre.
      */
-    void applyScoreboard(ArionPlayer player);
+    String getTitle(ArionPlayer player);
+
+    /**
+     * Défini les lignes du scoreboard en fonction du joueur.
+     *
+     * @param player Le joueur.
+     * @return Les lignes.
+     */
+    String[] getLines(ArionPlayer player);
 }

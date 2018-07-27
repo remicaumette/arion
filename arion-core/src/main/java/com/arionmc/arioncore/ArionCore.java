@@ -1,7 +1,8 @@
 package com.arionmc.arioncore;
 
 import com.arionmc.arioncore.api.ArionApi;
-import com.arionmc.arioncore.api.display.ArionDisplayManager;
+import com.arionmc.arioncore.api.display.defaults.RankChatFormatter;
+import com.arionmc.arioncore.api.display.defaults.RankNametagFormatter;
 import com.arionmc.arioncore.api.event.ArionServerTickEvent;
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.command.ArionCoreCommandManager;
@@ -35,13 +36,16 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         playerManager = new ArionCorePlayerManager(this);
         commandManager = new ArionCoreCommandManager(this);
         guiManager = new ArionCoreGuiManager(this);
-        displayManager = new ArionCoreDisplayManager(this);
+        displayManager = new ArionCoreDisplayManager();
 
         playerManager.onEnable();
 
         commandManager.registerCommand(new MessageCommand());
         commandManager.registerCommand(new LangCommand());
         commandManager.registerCommand(new ReplyCommand());
+
+        displayManager.setNametagFormatter(new RankNametagFormatter());
+        displayManager.setChatFormatter(new RankChatFormatter());
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
@@ -56,8 +60,8 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         ArionApi.setImpl(null);
 
         guiManager.onDisable();
-        playerManager.onDisable();
-        dataSource.close();
+        playerManager.onDisable()
+                .thenRun(dataSource::close);
 
         System.gc();
     }
@@ -88,7 +92,7 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
     }
 
     @Override
-    public ArionDisplayManager getDisplayManager() {
+    public ArionCoreDisplayManager getDisplayManager() {
         return displayManager;
     }
 

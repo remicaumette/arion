@@ -6,6 +6,6 @@ import com.arionmc.arioncore.api.player.ArionPlayer;
 public class RankChatFormatter implements ArionChatFormatter {
     @Override
     public String formatChat(ArionPlayer player, String message) {
-        return null;
+        return player.getRank().getName() +" "+ player.getName() + ": "+ message;
     }
 }
