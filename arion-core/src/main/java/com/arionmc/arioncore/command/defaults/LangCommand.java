@@ -26,7 +26,7 @@ public class LangCommand extends ArionCommand {
 
         if (newLang.isPresent()) {
             player.setLang(newLang.get());
-            player.sendMessage("lang.updated");
+            player.sendMessage("commands.lang.updated");
         } else {
             throw new InvalidUsageException(getUsage());
         }

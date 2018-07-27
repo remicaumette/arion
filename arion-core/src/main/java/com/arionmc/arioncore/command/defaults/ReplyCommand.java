@@ -42,13 +42,13 @@ public class ReplyCommand extends ArionCommand {
 
             String message = builder.toString();
 
-            player.sendMessage("message.send", targetPlayer.getName(), message);
-            targetPlayer.sendMessage("message.receive", player.getName(), message);
+            player.sendMessage("commands.message.send", targetPlayer.getName(), message);
+            targetPlayer.sendMessage("commands.message.receive", player.getName(), message);
 
             player.getData().put("reply-to", targetPlayer.getName());
             targetPlayer.getData().put("reply-to", player.getName());
         } else {
-            throw new CommandException("reply.error");
+            throw new CommandException("commands.reply.error");
         }
     }
 }

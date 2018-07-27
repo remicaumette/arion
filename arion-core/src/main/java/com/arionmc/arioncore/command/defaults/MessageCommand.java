@@ -17,7 +17,7 @@ public class MessageCommand extends ArionCommand {
         ArionPlayer target = arguments.getPlayer(0);
 
         if (target.equals(player)) {
-            throw new CommandException("message.yourself");
+            throw new CommandException("commands.message.yourself");
         }
 
         StringBuilder builder = new StringBuilder(arguments.getString(1));
@@ -29,8 +29,8 @@ public class MessageCommand extends ArionCommand {
 
         String message = builder.toString();
 
-        player.sendMessage("message.send", target.getName(), message);
-        target.sendMessage("message.receive", player.getName(), message);
+        player.sendMessage("commands.message.send", target.getName(), message);
+        target.sendMessage("commands.message.receive", player.getName(), message);
 
         player.getData().put("reply-to", target.getName());
         target.getData().put("reply-to", player.getName());
