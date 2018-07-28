@@ -4,11 +4,12 @@ import com.arionmc.arioncore.api.player.ArionPlayer;
 
 public interface ArionChatFormatter {
     /**
-     * Formatte le message du joueur.
+     * Formatte le message en fonction du joueur.
      *
-     * @param player Le joueur.
-     * @param message Le message.
+     * @param sender   Le joueur qui envoye le message.
+     * @param receiver Le joueur qui recoit le message.
+     * @param message  Le message.
      * @return Le message formatté.
      */
-    String formatChat(ArionPlayer player, String message);
+    String formatChat(ArionPlayer sender, ArionPlayer receiver, String message);
 }

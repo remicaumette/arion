@@ -5,6 +5,9 @@ fr:
     player-not-found: "&c{0} n'est pas connecté sur le serveur."
     argument-not-found: "&cL'argument {0} est manquant."
     not-allowed: "&cVous n'êtes pas autorisé à faire cela."
+  ranks:
+    player: "Joueur"
+    admin: "Administrateur"
   commands:
     lang:
       updated: "&aLangue mise à jour."
@@ -21,9 +24,12 @@ en:
     player-not-found: "&c{0} is not connected on this server."
     argument-not-found: "&cArgument {0} is missing."
     not-allowed: "&cYou are not allowed to do this action."
+  ranks:
+    player: "Player"
+    admin: "Administrator"
   commands:
     lang:
-      updated: "&aLang updated"
+      updated: "&aLang updated."
     message:
       send: "&f[&aMe &f-> &a{0}&f] &a{1}"
       receive: "&f[&a{0} &f-> &aMe&f] &a{1}"

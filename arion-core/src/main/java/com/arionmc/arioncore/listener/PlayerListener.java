@@ -31,22 +31,23 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
-        ArionCorePlayer player = plugin.getPlayerManager().getPlayer(event.getPlayer());
+        ArionCorePlayer sender = plugin.getPlayerManager().getPlayer(event.getPlayer());
 
-        if (player != null) {
+        event.setCancelled(true);
+
+        if (sender != null) {
             ArionChatFormatter formatter = plugin.getDisplayManager().getChatFormatter();
 
             if (formatter != null) {
-                String message = formatter.formatChat(player, event.getMessage());
+                String message = event.getMessage();
 
-                if (message != null) {
-                    event.setFormat(message);
-                } else {
-                    event.setCancelled(true);
-                }
+                plugin.getLogger().info("Player "+ sender.getName() +" says "+ message);
+                plugin.getPlayerManager()
+                        .getPlayers()
+                        .forEach(receiver -> receiver.sendRawMessage(formatter.formatChat(sender, receiver, message)));
+            } else {
+                plugin.getLogger().warning("The chat formatter is not defined");
             }
-        } else {
-            event.setCancelled(true);
         }
     }
 }
