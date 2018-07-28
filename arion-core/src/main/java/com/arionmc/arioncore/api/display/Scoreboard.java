@@ -2,7 +2,7 @@ package com.arionmc.arioncore.api.display;
 
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
-public interface ArionScoreboard {
+public interface Scoreboard {
     /**
      * Défini le titre du scoreboard en fonction du joueur.
      *

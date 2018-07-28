@@ -2,7 +2,7 @@ package com.arionmc.arioncore.player;
 
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.api.player.ArionPlayer;
-import com.arionmc.arioncore.api.player.ArionPlayerRank;
+import com.arionmc.arioncore.api.player.PlayerRank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,13 +15,13 @@ public class ArionCorePlayer implements ArionPlayer {
     private UUID uniqueId;
     private String name;
     private Lang lang;
-    private ArionPlayerRank rank;
+    private PlayerRank rank;
     private Date lastConnection;
     private Date firstConnection;
     private transient Player bukkitPlayer;
     private transient Map<String, Object> data;
 
-    public ArionCorePlayer(UUID uniqueId, String name, Lang lang, ArionPlayerRank rank, Date lastConnection,
+    public ArionCorePlayer(UUID uniqueId, String name, Lang lang, PlayerRank rank, Date lastConnection,
                            Date firstConnection) {
         this.uniqueId = uniqueId;
         this.name = name;
@@ -53,12 +53,12 @@ public class ArionCorePlayer implements ArionPlayer {
     }
 
     @Override
-    public ArionPlayerRank getRank() {
+    public PlayerRank getRank() {
         return rank;
     }
 
     @Override
-    public void setRank(ArionPlayerRank rank) {
+    public void setRank(PlayerRank rank) {
         this.rank = rank;
     }
 

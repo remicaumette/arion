@@ -33,14 +33,14 @@ public interface ArionPlayer {
     /**
      * @return Le rang du joueur.
      */
-    ArionPlayerRank getRank();
+    PlayerRank getRank();
 
     /**
      * Permet de changer le rang du joueur.
      *
      * @param rank Le nouveau rang du joueur.
      */
-    void setRank(ArionPlayerRank rank);
+    void setRank(PlayerRank rank);
 
     /**
      * @return Quand le joueur s'est connecté.

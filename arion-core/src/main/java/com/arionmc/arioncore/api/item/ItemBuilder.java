@@ -98,7 +98,7 @@ public class ItemBuilder {
      * @return L'instance actuellement utilisé.
      */
     public ItemBuilder withEnchant(Enchantment enchant, int level) {
-        item.addEnchantment(enchant, level);
+        item.addUnsafeEnchantment(enchant, level);
         return this;
     }
 

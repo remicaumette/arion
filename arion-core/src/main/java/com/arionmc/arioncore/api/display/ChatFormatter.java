@@ -2,7 +2,7 @@ package com.arionmc.arioncore.api.display;
 
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
-public interface ArionChatFormatter {
+public interface ChatFormatter {
     /**
      * Formatte le message en fonction du joueur.
      *
