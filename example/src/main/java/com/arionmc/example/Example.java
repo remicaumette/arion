@@ -3,7 +3,10 @@ package com.arionmc.example;
 import com.arionmc.arioncore.api.ArionApi;
 import com.arionmc.arioncore.api.event.ArionPlayerLoadedEvent;
 import com.arionmc.arioncore.api.lang.Lang;
-import com.arionmc.arioncore.api.nms.*;
+import com.arionmc.arioncore.api.nms.Tablist;
+import com.arionmc.arioncore.api.nms.TablistBuilder;
+import com.arionmc.arioncore.api.nms.Title;
+import com.arionmc.arioncore.api.nms.TitleBuilder;
 import com.arionmc.arioncore.api.player.ArionPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +21,7 @@ public class Example extends JavaPlugin implements Listener {
 
         ArionApi.getGuiManager().registerGui(new ExampleGui());
         ArionApi.getCommandManager().registerCommand(new ExampleCommand());
+        ArionApi.getDisplayManager().setScoreboardFormatter(new ExampleScoreboardFormatter());
     }
 
     @EventHandler

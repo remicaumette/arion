@@ -2,11 +2,11 @@ package com.arionmc.arioncore.api.display;
 
 public interface DisplayManager {
     /**
-     * Défini le scoreboard.
+     * Défini le format du scoreboard.
      *
-     * @param scoreboard Le scoreboard à utiliser.
+     * @param scoreboardFormatter Le format du scoreboard.
      */
-    void setScoreboard(Scoreboard scoreboard);
+    void setScoreboardFormatter(ScoreboardFormatter scoreboardFormatter);
 
     /**
      * Défini le format du nametag.

@@ -2,6 +2,8 @@ package com.arionmc.arioncore.listener;
 
 import com.arionmc.arioncore.ArionCore;
 import com.arionmc.arioncore.api.display.ChatFormatter;
+import com.arionmc.arioncore.api.event.ArionPlayerLoadedEvent;
+import com.arionmc.arioncore.api.event.ArionPlayerQuitEvent;
 import com.arionmc.arioncore.player.ArionCorePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,18 +38,17 @@ public class PlayerListener implements Listener {
         event.setCancelled(true);
 
         if (sender != null) {
-            ChatFormatter formatter = plugin.getDisplayManager().getChatFormatter();
-
-            if (formatter != null) {
-                String message = event.getMessage();
-
-                plugin.getLogger().info("Player " + sender.getName() + " says " + message);
-                plugin.getPlayerManager()
-                        .getPlayers()
-                        .forEach(receiver -> receiver.sendRawMessage(formatter.formatChat(sender, receiver, message)));
-            } else {
-                plugin.getLogger().warning("The chat formatter is not defined");
-            }
+            plugin.getDisplayManager().onChat(sender, event.getMessage());
         }
+    }
+
+    @EventHandler
+    public void onLoad(ArionPlayerLoadedEvent event) {
+        plugin.getDisplayManager().onLoad(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onQuit(ArionPlayerQuitEvent event) {
+        plugin.getDisplayManager().onQuit(event.getPlayer());
     }
 }

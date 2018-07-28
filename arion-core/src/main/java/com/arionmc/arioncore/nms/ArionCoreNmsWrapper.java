@@ -75,6 +75,53 @@ public class ArionCoreNmsWrapper implements NmsWrapper {
         }
     }
 
+    @Override
+    public void sendObjectivePacket(ArionPlayer player, ObjectiveAction action, String name, String displayName) {
+        try {
+            PacketPlayOutScoreboardObjective packet = new PacketPlayOutScoreboardObjective();
+            setField(packet, "a", name);
+            setField(packet, "d", action.ordinal());
+
+            if (action != ObjectiveAction.REMOVE) {
+                setField(packet, "b", displayName);
+                setField(packet, "c", IScoreboardCriteria.EnumScoreboardHealthDisplay.INTEGER);
+            }
+
+            sendPacket(player, packet);
+        } catch (Exception e) {
+            plugin.getLogger().log(Level.WARNING, "Unable to send objective packet to player " + player.getName(), e);
+        }
+    }
+
+    @Override
+    public void sendObjectiveSlotPacket(ArionPlayer player, String name, int slot) {
+        try {
+            PacketPlayOutScoreboardDisplayObjective packet = new PacketPlayOutScoreboardDisplayObjective();
+            setField(packet, "a", slot);
+            setField(packet, "b", name);
+            sendPacket(player, packet);
+        } catch (Exception e) {
+            plugin.getLogger().log(Level.WARNING, "Unable to send objective slot packet to player " + player.getName(), e);
+        }
+    }
+
+    @Override
+    public void sendScoreboardScorePacket(ArionPlayer player, String name, ScoreboardScoreAction action, int score, String line) {
+        try {
+            PacketPlayOutScoreboardScore packet = new PacketPlayOutScoreboardScore(line);
+
+            if (action == ScoreboardScoreAction.CHANGE) {
+                setField(packet, "b", name);
+                setField(packet, "c", score);
+                setField(packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.CHANGE);
+            }
+
+            sendPacket(player, packet);
+        } catch (Exception e) {
+            plugin.getLogger().log(Level.WARNING, "Unable to send scoreboard score packet to player " + player.getName(), e);
+        }
+    }
+
     private void sendPacket(ArionPlayer player, Packet packet) {
         Player bukkitPlayer = player.getBukkitPlayer();
 

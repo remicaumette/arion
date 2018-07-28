@@ -1,21 +1,28 @@
 package com.arionmc.arioncore.api.display;
 
-import com.arionmc.arioncore.api.player.ArionPlayer;
-
 public interface Scoreboard {
     /**
-     * Défini le titre du scoreboard en fonction du joueur.
-     *
-     * @param player Le joueur.
-     * @return Le titre.
+     * @return Le nom du scoreboard.
      */
-    String getTitle(ArionPlayer player);
+    String getName();
 
     /**
-     * Défini les lignes du scoreboard en fonction du joueur.
+     * Défini le nom du scoreboard.
      *
-     * @param player Le joueur.
-     * @return Les lignes.
+     * @param name Le nom du scoreboard.
      */
-    String[] getLines(ArionPlayer player);
+    void setName(String name);
+
+    /**
+     * @return Les lignes du scoreboard.
+     */
+    String[] getLines();
+
+    /**
+     * Défini le contenu d'une ligne du scoreboard.
+     *
+     * @param line  La ligne a définir.
+     * @param value Son contenu.
+     */
+    void setLine(int line, String value);
 }

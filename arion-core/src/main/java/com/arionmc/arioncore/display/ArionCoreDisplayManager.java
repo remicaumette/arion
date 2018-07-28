@@ -1,29 +1,22 @@
 package com.arionmc.arioncore.display;
 
-import com.arionmc.arioncore.api.display.ChatFormatter;
-import com.arionmc.arioncore.api.display.DisplayManager;
-import com.arionmc.arioncore.api.display.NametagFormatter;
-import com.arionmc.arioncore.api.display.Scoreboard;
+import com.arionmc.arioncore.ArionCore;
+import com.arionmc.arioncore.api.display.*;
+import com.arionmc.arioncore.api.player.ArionPlayer;
 
 public class ArionCoreDisplayManager implements DisplayManager {
-    private Scoreboard scoreboard;
+    private ArionCore plugin;
+    private ScoreboardFormatter scoreboardFormatter;
     private NametagFormatter nametagFormatter;
     private ChatFormatter chatFormatter;
 
-    public ArionCoreDisplayManager() {
-    }
-
-    public Scoreboard getScoreboard() {
-        return scoreboard;
+    public ArionCoreDisplayManager(ArionCore plugin) {
+        this.plugin = plugin;
     }
 
     @Override
-    public void setScoreboard(Scoreboard scoreboard) {
-        this.scoreboard = scoreboard;
-    }
-
-    public NametagFormatter getNametagFormatter() {
-        return nametagFormatter;
+    public void setScoreboardFormatter(ScoreboardFormatter scoreboardFormatter) {
+        this.scoreboardFormatter = scoreboardFormatter;
     }
 
     @Override
@@ -31,12 +24,35 @@ public class ArionCoreDisplayManager implements DisplayManager {
         this.nametagFormatter = nametagFormatter;
     }
 
-    public ChatFormatter getChatFormatter() {
-        return chatFormatter;
-    }
-
     @Override
     public void setChatFormatter(ChatFormatter chatFormatter) {
         this.chatFormatter = chatFormatter;
+    }
+
+    public void onTick() {
+        if (scoreboardFormatter != null) {
+            plugin.getPlayerManager().getPlayers()
+                    .forEach(player -> scoreboardFormatter.formatScoreboard(player, (Scoreboard) player.getData().get("scoreboard")));
+        }
+    }
+
+    public void onLoad(ArionPlayer player) {
+        player.getData().put("scoreboard", new ArionCoreScoreboard(plugin, player));
+    }
+
+    public void onQuit(ArionPlayer player) {
+        ArionCoreScoreboard scoreboard = (ArionCoreScoreboard) player.getData().get("scoreboard");
+        scoreboard.delete();
+    }
+
+    public void onChat(ArionPlayer sender, String message) {
+        if (chatFormatter != null) {
+            plugin.getLogger().info("Player " + sender.getName() + " says " + message);
+            plugin.getPlayerManager()
+                    .getPlayers()
+                    .forEach(receiver -> receiver.sendRawMessage(chatFormatter.formatChat(sender, receiver, message)));
+        } else {
+            plugin.getLogger().warning("The chat formatter is not defined");
+        }
     }
 }

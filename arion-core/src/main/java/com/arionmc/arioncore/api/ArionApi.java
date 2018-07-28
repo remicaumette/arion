@@ -67,6 +67,10 @@ public class ArionApi {
      * @param impl L'implémentation à utiliser.
      */
     public static void setImpl(Impl impl) {
+        if (ArionApi.impl != null) {
+            throw new IllegalArgumentException("Implementation already defined");
+        }
+
         ArionApi.impl = impl;
     }
 

@@ -13,6 +13,7 @@ import com.arionmc.arioncore.display.ArionCoreDisplayManager;
 import com.arionmc.arioncore.gui.ArionCoreGuiManager;
 import com.arionmc.arioncore.listener.InventoryListener;
 import com.arionmc.arioncore.listener.PlayerListener;
+import com.arionmc.arioncore.listener.ServerListener;
 import com.arionmc.arioncore.nms.ArionCoreNmsWrapper;
 import com.arionmc.arioncore.player.ArionCorePlayerManager;
 import com.zaxxer.hikari.HikariConfig;
@@ -39,7 +40,7 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         playerManager = new ArionCorePlayerManager(this);
         commandManager = new ArionCoreCommandManager(this);
         guiManager = new ArionCoreGuiManager(this);
-        displayManager = new ArionCoreDisplayManager();
+        displayManager = new ArionCoreDisplayManager(this);
 
         playerManager.onEnable();
 
@@ -52,6 +53,8 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
+        getServer().getPluginManager().registerEvents(new ServerListener(this), this);
+
 
         getServer().getScheduler().runTaskTimer(this, this, 0L, 1L);
 
@@ -60,8 +63,6 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
 
     @Override
     public void onDisable() {
-        ArionApi.setImpl(null);
-
         guiManager.onDisable();
         playerManager.onDisable()
                 .thenRun(dataSource::close);
