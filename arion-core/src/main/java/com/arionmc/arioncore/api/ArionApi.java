@@ -1,8 +1,9 @@
 package com.arionmc.arioncore.api;
 
-import com.arionmc.arioncore.api.command.ArionCommandManager;
-import com.arionmc.arioncore.api.display.ArionDisplayManager;
-import com.arionmc.arioncore.api.gui.ArionGuiManager;
+import com.arionmc.arioncore.api.command.CommandManager;
+import com.arionmc.arioncore.api.display.DisplayManager;
+import com.arionmc.arioncore.api.gui.GuiManager;
+import com.arionmc.arioncore.api.nms.NmsWrapper;
 import com.arionmc.arioncore.api.player.ArionPlayerManager;
 
 import javax.sql.DataSource;
@@ -26,6 +27,13 @@ public class ArionApi {
     }
 
     /**
+     * @return Le wrapper nms.
+     */
+    public static NmsWrapper getNmsWrapper() {
+        return impl.getNmsWrapper();
+    }
+
+    /**
      * @return Le gestionnaire des joueurs.
      */
     public static ArionPlayerManager getPlayerManager() {
@@ -35,21 +43,21 @@ public class ArionApi {
     /**
      * @return Le gestionnaire des commandes.
      */
-    public static ArionCommandManager getCommandManager() {
+    public static CommandManager getCommandManager() {
         return impl.getCommandManager();
     }
 
     /**
      * @return Le gestionnaire des interfaces.
      */
-    public static ArionGuiManager getGuiManager() {
+    public static GuiManager getGuiManager() {
         return impl.getGuiManager();
     }
 
     /**
      * @return Le gestionnaire des affichages.
      */
-    public static ArionDisplayManager getDisplayManager() {
+    public static DisplayManager getDisplayManager() {
         return impl.getDisplayManager();
     }
 
@@ -74,6 +82,11 @@ public class ArionApi {
         DataSource getDataSource();
 
         /**
+         * @return Le wrapper nms.
+         */
+        NmsWrapper getNmsWrapper();
+
+        /**
          * @return Le gestionnaire des joueurs.
          */
         ArionPlayerManager getPlayerManager();
@@ -81,16 +94,16 @@ public class ArionApi {
         /**
          * @return Le gestionnaire des commandes.
          */
-        ArionCommandManager getCommandManager();
+        CommandManager getCommandManager();
 
         /**
          * @return Le gestionnaire des interfaces.
          */
-        ArionGuiManager getGuiManager();
+        GuiManager getGuiManager();
 
         /**
          * @return Le gestionnaire des affichages.
          */
-        ArionDisplayManager getDisplayManager();
+        DisplayManager getDisplayManager();
     }
 }

@@ -4,6 +4,9 @@ script:
   - cd arion-core
   - mvn clean install
   - cd ..
+  - cd example
+  - mvn clean install
+  - cd ..
 deploy:
   provider: releases
   api_key:

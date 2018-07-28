@@ -4,7 +4,7 @@ import com.arionmc.arioncore.api.player.ArionPlayer;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 
-public abstract class ArionGui {
+public abstract class Gui {
     /**
      * Permet de définir le nom de l'inventaire par rapport à un joueur.
      *

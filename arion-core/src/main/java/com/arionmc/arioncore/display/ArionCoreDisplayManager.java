@@ -1,42 +1,42 @@
 package com.arionmc.arioncore.display;
 
-import com.arionmc.arioncore.api.display.ArionChatFormatter;
-import com.arionmc.arioncore.api.display.ArionDisplayManager;
-import com.arionmc.arioncore.api.display.ArionNametagFormatter;
-import com.arionmc.arioncore.api.display.ArionScoreboard;
+import com.arionmc.arioncore.api.display.ChatFormatter;
+import com.arionmc.arioncore.api.display.DisplayManager;
+import com.arionmc.arioncore.api.display.NametagFormatter;
+import com.arionmc.arioncore.api.display.Scoreboard;
 
-public class ArionCoreDisplayManager implements ArionDisplayManager {
-    private ArionScoreboard scoreboard;
-    private ArionNametagFormatter nametagFormatter;
-    private ArionChatFormatter chatFormatter;
+public class ArionCoreDisplayManager implements DisplayManager {
+    private Scoreboard scoreboard;
+    private NametagFormatter nametagFormatter;
+    private ChatFormatter chatFormatter;
 
     public ArionCoreDisplayManager() {
     }
 
-    public ArionScoreboard getScoreboard() {
+    public Scoreboard getScoreboard() {
         return scoreboard;
     }
 
     @Override
-    public void setScoreboard(ArionScoreboard scoreboard) {
+    public void setScoreboard(Scoreboard scoreboard) {
         this.scoreboard = scoreboard;
     }
 
-    public ArionNametagFormatter getNametagFormatter() {
+    public NametagFormatter getNametagFormatter() {
         return nametagFormatter;
     }
 
     @Override
-    public void setNametagFormatter(ArionNametagFormatter nametagFormatter) {
+    public void setNametagFormatter(NametagFormatter nametagFormatter) {
         this.nametagFormatter = nametagFormatter;
     }
 
-    public ArionChatFormatter getChatFormatter() {
+    public ChatFormatter getChatFormatter() {
         return chatFormatter;
     }
 
     @Override
-    public void setChatFormatter(ArionChatFormatter chatFormatter) {
+    public void setChatFormatter(ChatFormatter chatFormatter) {
         this.chatFormatter = chatFormatter;
     }
 }

@@ -1,7 +1,7 @@
 package com.arionmc.arioncore.command;
 
 import com.arionmc.arioncore.ArionCore;
-import com.arionmc.arioncore.api.command.ArionCommandArguments;
+import com.arionmc.arioncore.api.command.CommandArguments;
 import com.arionmc.arioncore.api.command.exception.ArgumentNotFoundException;
 import com.arionmc.arioncore.api.command.exception.CommandException;
 import com.arionmc.arioncore.api.command.exception.PlayerNotFoundException;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ArionCoreCommandArguments implements ArionCommandArguments {
+public class ArionCoreCommandArguments implements CommandArguments {
     private ArionCore plugin;
     private List<String> arguments;
 

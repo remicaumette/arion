@@ -9,14 +9,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ArionCommand {
+public abstract class Command {
     private String name;
     private String description;
     private String usage;
     private ArionPlayerRank requiredRank;
     private List<String> aliases;
 
-    public ArionCommand(String name) {
+    public Command(String name) {
         this.name = name;
         this.description = "";
         this.usage = "/" + name;
@@ -24,7 +24,7 @@ public abstract class ArionCommand {
         this.aliases = new ArrayList<>();
     }
 
-    public ArionCommand(String name, String description, String usage, ArionPlayerRank requiredRank) {
+    public Command(String name, String description, String usage, ArionPlayerRank requiredRank) {
         this.name = name;
         this.description = description;
         this.usage = usage;
@@ -32,7 +32,7 @@ public abstract class ArionCommand {
         this.aliases = new ArrayList<>();
     }
 
-    public ArionCommand(String name, String description, String usage, ArionPlayerRank requiredRank, String... aliases) {
+    public Command(String name, String description, String usage, ArionPlayerRank requiredRank, String... aliases) {
         this.name = name;
         this.description = description;
         this.usage = usage;
@@ -127,5 +127,5 @@ public abstract class ArionCommand {
      * @param arguments Les arguments passé.
      * @throws CommandException Si une erreur se produit lors de l'execution de la commande.
      */
-    public abstract void handle(ArionPlayer player, ArionCommandArguments arguments) throws CommandException;
+    public abstract void handle(ArionPlayer player, CommandArguments arguments) throws CommandException;
 }

@@ -1,11 +1,11 @@
 package com.arionmc.arioncore.command.defaults;
 
-import com.arionmc.arioncore.api.command.ArionCommand;
-import com.arionmc.arioncore.api.command.ArionCommandArguments;
+import com.arionmc.arioncore.api.command.Command;
+import com.arionmc.arioncore.api.command.CommandArguments;
 import com.arionmc.arioncore.api.command.exception.CommandException;
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
-public class MessageCommand extends ArionCommand {
+public class MessageCommand extends Command {
     public MessageCommand() {
         super("message");
         setUsage("/message <player> <message>");
@@ -13,7 +13,7 @@ public class MessageCommand extends ArionCommand {
     }
 
     @Override
-    public void handle(ArionPlayer player, ArionCommandArguments arguments) throws CommandException {
+    public void handle(ArionPlayer player, CommandArguments arguments) throws CommandException {
         ArionPlayer target = arguments.getPlayer(0);
 
         if (target.equals(player)) {

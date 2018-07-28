@@ -7,7 +7,7 @@ import java.util.concurrent.CompletableFuture;
  * @param <ID> Le type de l'identifiant.
  * @param <T>  Le model objet de la table.
  */
-public interface ArionRepository<ID, T> {
+public interface Repository<ID, T> {
     /**
      * @return Retourne toutes les objets en base de données.
      */

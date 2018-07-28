@@ -1,7 +1,7 @@
 package com.arionmc.arioncore.listener;
 
 import com.arionmc.arioncore.ArionCore;
-import com.arionmc.arioncore.api.gui.ArionGui;
+import com.arionmc.arioncore.api.gui.Gui;
 import com.arionmc.arioncore.player.ArionCorePlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class InventoryListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
             Inventory inventory = event.getClickedInventory();
-            ArionGui gui = plugin.getGuiManager().getOpenInventories().get(inventory.hashCode());
+            Gui gui = plugin.getGuiManager().getOpenInventories().get(inventory.hashCode());
 
             if (gui != null) {
                 ArionCorePlayer player = plugin.getPlayerManager().getPlayer((Player) event.getWhoClicked());
@@ -35,7 +35,7 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
         Inventory inventory = event.getInventory();
-        ArionGui gui = plugin.getGuiManager().getOpenInventories().get(inventory.hashCode());
+        Gui gui = plugin.getGuiManager().getOpenInventories().get(inventory.hashCode());
 
         if (gui != null) {
             ArionCorePlayer player = plugin.getPlayerManager().getPlayer((Player) event.getPlayer());

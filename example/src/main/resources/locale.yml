@@ -1,0 +1,8 @@
+fr:
+  hello: "&5Bonjour !"
+  join: "&a{0} vient de se connecter."
+  quit: "&c{0} vient de se déconnecter."
+en:
+  hello: "&5Hello!"
+  join: "&a{0} just connected."
+  quit: "&c{0} just disconnected."

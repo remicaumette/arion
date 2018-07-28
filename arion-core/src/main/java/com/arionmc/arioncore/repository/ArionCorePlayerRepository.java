@@ -3,7 +3,7 @@ package com.arionmc.arioncore.repository;
 import com.arionmc.arioncore.ArionCore;
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.api.player.ArionPlayerRank;
-import com.arionmc.arioncore.api.repository.ArionRepository;
+import com.arionmc.arioncore.api.repository.Repository;
 import com.arionmc.arioncore.player.ArionCorePlayer;
 
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
-public class ArionCorePlayerRepository implements ArionRepository<UUID, ArionCorePlayer> {
+public class ArionCorePlayerRepository implements Repository<UUID, ArionCorePlayer> {
     private ArionCore plugin;
 
     public ArionCorePlayerRepository(ArionCore plugin) {

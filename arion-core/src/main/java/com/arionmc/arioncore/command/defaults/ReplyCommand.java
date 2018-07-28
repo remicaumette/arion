@@ -1,16 +1,15 @@
 package com.arionmc.arioncore.command.defaults;
 
 import com.arionmc.arioncore.api.ArionApi;
-import com.arionmc.arioncore.api.command.ArionCommand;
-import com.arionmc.arioncore.api.command.ArionCommandArguments;
+import com.arionmc.arioncore.api.command.Command;
+import com.arionmc.arioncore.api.command.CommandArguments;
 import com.arionmc.arioncore.api.command.exception.CommandException;
 import com.arionmc.arioncore.api.command.exception.PlayerNotFoundException;
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public class ReplyCommand extends ArionCommand {
+public class ReplyCommand extends Command {
     public ReplyCommand() {
         super("reply");
         setUsage("/reply <message>");
@@ -18,7 +17,7 @@ public class ReplyCommand extends ArionCommand {
     }
 
     @Override
-    public void handle(ArionPlayer player, ArionCommandArguments arguments) throws CommandException {
+    public void handle(ArionPlayer player, CommandArguments arguments) throws CommandException {
         if (player.getData().containsKey("reply-to")) {
             String replyTo = String.valueOf(player.getData().get("reply-to"));
 
