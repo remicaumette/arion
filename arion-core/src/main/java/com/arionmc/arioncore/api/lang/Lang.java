@@ -1,13 +1,13 @@
 package com.arionmc.arioncore.api.lang;
 
-import com.arionmc.arioncore.api.ArionApi;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.stream.Stream;
 
 public enum Lang {
@@ -62,16 +62,12 @@ public enum Lang {
      * @param plugin Le plugin.
      */
     public static void importTranslationFromPlugin(JavaPlugin plugin) {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource("locale.yml")));
+
         Stream.of(values()).forEach(lang -> {
-            try {
-                Properties properties = new Properties();
-                properties.load(plugin.getResource(lang.name().toLowerCase() + ".properties"));
-                properties.stringPropertyNames()
-                        .forEach(property -> lang.sentences.put(property, properties.getProperty(property)));
-            } catch (IOException e) {
-                ArionApi.getLogger()
-                        .warning("Unable to load the " + lang.name().toLowerCase() + " properties file.");
-            }
+            ConfigurationSection section = config.getConfigurationSection(lang.code.toLowerCase());
+            section.getKeys(true)
+                    .forEach(key -> lang.sentences.put(key, section.getString(key)));
         });
     }
 }

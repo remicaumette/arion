@@ -1,8 +1,9 @@
 package com.arionmc.arioncore;
 
 import com.arionmc.arioncore.api.ArionApi;
-import com.arionmc.arioncore.api.display.ArionDisplayManager;
-import com.arionmc.arioncore.api.event.ArionServerTickEvent;
+import com.arionmc.arioncore.api.display.defaults.RankChatFormatter;
+import com.arionmc.arioncore.api.display.defaults.RankNametagFormatter;
+import com.arionmc.arioncore.api.event.ServerTickEvent;
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.command.ArionCoreCommandManager;
 import com.arionmc.arioncore.command.defaults.LangCommand;
@@ -12,6 +13,8 @@ import com.arionmc.arioncore.display.ArionCoreDisplayManager;
 import com.arionmc.arioncore.gui.ArionCoreGuiManager;
 import com.arionmc.arioncore.listener.InventoryListener;
 import com.arionmc.arioncore.listener.PlayerListener;
+import com.arionmc.arioncore.listener.ServerListener;
+import com.arionmc.arioncore.nms.ArionCoreNmsWrapper;
 import com.arionmc.arioncore.player.ArionCorePlayerManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -19,6 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
     private HikariDataSource dataSource;
+    private ArionCoreNmsWrapper nmsWrapper;
     private ArionCorePlayerManager playerManager;
     private ArionCoreCommandManager commandManager;
     private ArionCoreGuiManager guiManager;
@@ -32,6 +36,7 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         Lang.importTranslationFromPlugin(this);
 
         dataSource = createDataSource();
+        nmsWrapper = new ArionCoreNmsWrapper(this);
         playerManager = new ArionCorePlayerManager(this);
         commandManager = new ArionCoreCommandManager(this);
         guiManager = new ArionCoreGuiManager(this);
@@ -43,8 +48,13 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
         commandManager.registerCommand(new LangCommand());
         commandManager.registerCommand(new ReplyCommand());
 
+        displayManager.setNametagFormatter(new RankNametagFormatter());
+        displayManager.setChatFormatter(new RankChatFormatter());
+
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
+        getServer().getPluginManager().registerEvents(new ServerListener(this), this);
+
 
         getServer().getScheduler().runTaskTimer(this, this, 0L, 1L);
 
@@ -53,23 +63,26 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
 
     @Override
     public void onDisable() {
-        ArionApi.setImpl(null);
-
         guiManager.onDisable();
-        playerManager.onDisable();
-        dataSource.close();
+        playerManager.onDisable()
+                .thenRun(dataSource::close);
 
         System.gc();
     }
 
     @Override
     public void run() {
-        getServer().getPluginManager().callEvent(new ArionServerTickEvent(ticks++));
+        getServer().getPluginManager().callEvent(new ServerTickEvent(ticks++));
     }
 
     @Override
     public HikariDataSource getDataSource() {
         return dataSource;
+    }
+
+    @Override
+    public ArionCoreNmsWrapper getNmsWrapper() {
+        return nmsWrapper;
     }
 
     @Override
@@ -88,11 +101,11 @@ public class ArionCore extends JavaPlugin implements ArionApi.Impl, Runnable {
     }
 
     @Override
-    public ArionDisplayManager getDisplayManager() {
+    public ArionCoreDisplayManager getDisplayManager() {
         return displayManager;
     }
 
-    public HikariDataSource createDataSource() {
+    private HikariDataSource createDataSource() {
         HikariConfig config = new HikariConfig();
 
         config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");

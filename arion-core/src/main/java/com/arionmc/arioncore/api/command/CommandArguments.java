@@ -5,7 +5,7 @@ import com.arionmc.arioncore.api.player.ArionPlayer;
 
 import java.util.List;
 
-public interface ArionCommandArguments {
+public interface CommandArguments {
     /**
      * @return Les arguments de la commande.
      */

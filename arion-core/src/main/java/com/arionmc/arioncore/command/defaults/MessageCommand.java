@@ -1,11 +1,11 @@
 package com.arionmc.arioncore.command.defaults;
 
-import com.arionmc.arioncore.api.command.ArionCommand;
-import com.arionmc.arioncore.api.command.ArionCommandArguments;
+import com.arionmc.arioncore.api.command.Command;
+import com.arionmc.arioncore.api.command.CommandArguments;
 import com.arionmc.arioncore.api.command.exception.CommandException;
 import com.arionmc.arioncore.api.player.ArionPlayer;
 
-public class MessageCommand extends ArionCommand {
+public class MessageCommand extends Command {
     public MessageCommand() {
         super("message");
         setUsage("/message <player> <message>");
@@ -13,11 +13,11 @@ public class MessageCommand extends ArionCommand {
     }
 
     @Override
-    public void handle(ArionPlayer player, ArionCommandArguments arguments) throws CommandException {
+    public void handle(ArionPlayer player, CommandArguments arguments) throws CommandException {
         ArionPlayer target = arguments.getPlayer(0);
 
         if (target.equals(player)) {
-            throw new CommandException("message.yourself");
+            throw new CommandException("commands.message.yourself");
         }
 
         StringBuilder builder = new StringBuilder(arguments.getString(1));
@@ -29,8 +29,8 @@ public class MessageCommand extends ArionCommand {
 
         String message = builder.toString();
 
-        player.sendMessage("message.send", target.getName(), message);
-        target.sendMessage("message.receive", player.getName(), message);
+        player.sendMessage("commands.message.send", target.getName(), message);
+        target.sendMessage("commands.message.receive", player.getName(), message);
 
         player.getData().put("reply-to", target.getName());
         target.getData().put("reply-to", player.getName());

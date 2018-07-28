@@ -1,0 +1,5 @@
+name: Example
+main: com.arionmc.example.Example
+version: 1.0.0-SNAPSHOT
+author: ArionMC
+depend: [ArionCore]

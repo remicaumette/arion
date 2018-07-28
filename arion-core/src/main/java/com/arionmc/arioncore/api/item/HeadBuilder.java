@@ -85,7 +85,7 @@ public class HeadBuilder {
      * @return L'instance actuellement utilisé.
      */
     public HeadBuilder withEnchant(Enchantment enchant, int level) {
-        item.addEnchantment(enchant, level);
+        item.addUnsafeEnchantment(enchant, level);
         return this;
     }
 
