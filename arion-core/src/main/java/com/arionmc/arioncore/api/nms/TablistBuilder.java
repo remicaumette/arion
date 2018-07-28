@@ -33,6 +33,10 @@ public class TablistBuilder {
      * @return La tablist.
      */
     public Tablist build() {
+        if (header == null && footer == null) {
+            throw new IllegalArgumentException("header or footer can't be empty!");
+        }
+
         return new Tablist() {
             @Override
             public String getHeader() {

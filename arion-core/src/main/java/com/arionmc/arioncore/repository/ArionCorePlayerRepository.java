@@ -2,7 +2,7 @@ package com.arionmc.arioncore.repository;
 
 import com.arionmc.arioncore.ArionCore;
 import com.arionmc.arioncore.api.lang.Lang;
-import com.arionmc.arioncore.api.player.PlayerRank;
+import com.arionmc.arioncore.api.player.ArionPlayerRank;
 import com.arionmc.arioncore.api.repository.Repository;
 import com.arionmc.arioncore.player.ArionCorePlayer;
 
@@ -54,7 +54,7 @@ public class ArionCorePlayerRepository implements Repository<UUID, ArionCorePlay
                             UUID.fromString(result.getString(1)),
                             result.getString(2),
                             Lang.valueOf(result.getString(3)),
-                            PlayerRank.valueOf(result.getString(4)),
+                            ArionPlayerRank.valueOf(result.getString(4)),
                             result.getTimestamp(5),
                             result.getTimestamp(6)));
                 }
@@ -87,7 +87,7 @@ public class ArionCorePlayerRepository implements Repository<UUID, ArionCorePlay
                             UUID.fromString(result.getString(1)),
                             result.getString(2),
                             Lang.valueOf(result.getString(3)),
-                            PlayerRank.valueOf(result.getString(4)),
+                            ArionPlayerRank.valueOf(result.getString(4)),
                             result.getTimestamp(5),
                             result.getTimestamp(6));
                 }

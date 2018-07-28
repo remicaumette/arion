@@ -3,8 +3,7 @@ package com.arionmc.example;
 import com.arionmc.arioncore.api.ArionApi;
 import com.arionmc.arioncore.api.event.ArionPlayerLoadedEvent;
 import com.arionmc.arioncore.api.lang.Lang;
-import com.arionmc.arioncore.api.nms.Tablist;
-import com.arionmc.arioncore.api.nms.TablistBuilder;
+import com.arionmc.arioncore.api.nms.*;
 import com.arionmc.arioncore.api.player.ArionPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +27,16 @@ public class Example extends JavaPlugin implements Listener {
                 .withHeader("Bienvenue " + player.getName() + " !")
                 .withFooter("Tu es sur ArionMC!")
                 .build();
+        Title title = new TitleBuilder()
+                .withTitle("Bienvenue sur")
+                .withSubtitle("§cDESPACITO 2")
+                .withFadeIn(20)
+                .withStay(120)
+                .withFadeOut(60)
+                .build();
 
         ArionApi.getNmsWrapper().sendTablist(player, tablist);
+        ArionApi.getNmsWrapper().sendTitle(player, title);
+        ArionApi.getNmsWrapper().sendActionbar(player, "§aHello world");
     }
 }

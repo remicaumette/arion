@@ -2,7 +2,7 @@ package com.arionmc.arioncore.api.command;
 
 import com.arionmc.arioncore.api.command.exception.CommandException;
 import com.arionmc.arioncore.api.player.ArionPlayer;
-import com.arionmc.arioncore.api.player.PlayerRank;
+import com.arionmc.arioncore.api.player.ArionPlayerRank;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,18 +13,18 @@ public abstract class Command {
     private String name;
     private String description;
     private String usage;
-    private PlayerRank requiredRank;
+    private ArionPlayerRank requiredRank;
     private List<String> aliases;
 
     public Command(String name) {
         this.name = name;
         this.description = "";
         this.usage = "/" + name;
-        this.requiredRank = PlayerRank.PLAYER;
+        this.requiredRank = ArionPlayerRank.PLAYER;
         this.aliases = new ArrayList<>();
     }
 
-    public Command(String name, String description, String usage, PlayerRank requiredRank) {
+    public Command(String name, String description, String usage, ArionPlayerRank requiredRank) {
         this.name = name;
         this.description = description;
         this.usage = usage;
@@ -32,7 +32,7 @@ public abstract class Command {
         this.aliases = new ArrayList<>();
     }
 
-    public Command(String name, String description, String usage, PlayerRank requiredRank, String... aliases) {
+    public Command(String name, String description, String usage, ArionPlayerRank requiredRank, String... aliases) {
         this.name = name;
         this.description = description;
         this.usage = usage;
@@ -82,7 +82,7 @@ public abstract class Command {
     /**
      * @return Le rang minimum requis pour utiliser cette commande.
      */
-    public PlayerRank getRequiredRank() {
+    public ArionPlayerRank getRequiredRank() {
         return requiredRank;
     }
 
@@ -91,7 +91,7 @@ public abstract class Command {
      *
      * @param requiredRank Le rang minimum requis pour utiliser cette commande.
      */
-    protected void setRequiredRank(PlayerRank requiredRank) {
+    protected void setRequiredRank(ArionPlayerRank requiredRank) {
         this.requiredRank = requiredRank;
     }
 

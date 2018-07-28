@@ -7,7 +7,7 @@ import com.arionmc.arioncore.api.event.ArionPlayerQuitEvent;
 import com.arionmc.arioncore.api.event.ArionPlayerSavedEvent;
 import com.arionmc.arioncore.api.lang.Lang;
 import com.arionmc.arioncore.api.player.ArionPlayerManager;
-import com.arionmc.arioncore.api.player.PlayerRank;
+import com.arionmc.arioncore.api.player.ArionPlayerRank;
 import com.arionmc.arioncore.repository.ArionCorePlayerRepository;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -89,7 +89,7 @@ public class ArionCorePlayerManager implements ArionPlayerManager {
                     if (player == null) {
                         Date date = new Date();
                         return new ArionCorePlayer(bukkitPlayer.getUniqueId(), bukkitPlayer.getName(),
-                                Lang.FRENCH, PlayerRank.PLAYER, date, date);
+                                Lang.FRENCH, ArionPlayerRank.PLAYER, date, date);
                     }
 
                     return player;
